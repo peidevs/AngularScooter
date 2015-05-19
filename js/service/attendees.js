@@ -1,7 +1,12 @@
 'use strict';
-scooter.factory('attendees', function ($http, scooter) {
+scooter.factory('attendees', function ($http) {
     var self = this;
     self.attendees = [];
+
+    var getRandom = function (min, max) {
+        var x = Math.floor(Math.random() * (max - min + 1)) + min;
+        return x;
+    };
 
     var doesWinnerExist = function(){
         var numberPlayersStillInGame = self.attendees.filter( function( attendee){
@@ -11,9 +16,13 @@ scooter.factory('attendees', function ($http, scooter) {
         return (numberPlayersStillInGame <= 1);
     };
 
+    var isLoserThisRound = function(){
+        return (getRandom(1, 4) === 1);
+    };
+
     var randomizeAttendees = function(){
-        for (var i = self.attendees.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
+        for (var i = 0; i < self.attendees.length; i++) {
+            var j = getRandom(0, (self.attendees.length -1) );
             var temp = self.attendees[i];
             self.attendees[i] = self.attendees[j];
             self.attendees[j] = temp;
@@ -39,7 +48,7 @@ scooter.factory('attendees', function ($http, scooter) {
 
         play : function(){
             self.attendees.forEach( function( attendee){
-                if( !doesWinnerExist() && scooter.isLoserThisRound() ){
+                if( !doesWinnerExist() && isLoserThisRound() ){
                    attendee.isAlive = false;
                 };
             });
