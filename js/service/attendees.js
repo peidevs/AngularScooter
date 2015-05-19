@@ -3,6 +3,24 @@ scooter.factory('attendees', function ($http, scooter) {
     var self = this;
     self.attendees = [];
 
+    var doesWinnerExist = function(){
+        var numberPlayersStillInGame = self.attendees.filter( function( attendee){
+            return attendee.isAlive;
+        }).length;
+
+        return (numberPlayersStillInGame <= 1);
+    };
+
+    var randomizeAttendees = function(){
+        for (var i = self.attendees.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = self.attendees[i];
+            self.attendees[i] = self.attendees[j];
+            self.attendees[j] = temp;
+        }
+    };
+
+
     $http.get('attendees.json').then(function (result) {
         result.data.forEach(function (attendee) {
             self.attendees.push({
@@ -10,15 +28,9 @@ scooter.factory('attendees', function ($http, scooter) {
                 isAlive: true
             })
         });
+
+        randomizeAttendees();
     });
-
-    var doesWinnerExist = function(){
-        var numberPlayersStillInGame = self.attendees.filter( function( attendee){
-            return attendee.isAlive;
-        }).length;
-
-        return (numberPlayersStillInGame <= 1);
-    }
 
     return {
         get : function(){
@@ -37,6 +49,8 @@ scooter.factory('attendees', function ($http, scooter) {
             self.attendees.forEach( function( attendee ){
                 attendee.isAlive = true;
             } );
+
+            randomizeAttendees();
         }
-    }
+    };
 });
