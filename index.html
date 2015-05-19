@@ -14,7 +14,7 @@
 
     <div class="col-xs-10">
         <ul>
-            <li ng-repeat="attendee in attendees" ng-show="attendee.isAlive">
+            <li ng-repeat="attendee in attendees" ng-class="{loser: !attendee.isAlive}">
                 {{attendee.name}}
             </li>
         </ul>
