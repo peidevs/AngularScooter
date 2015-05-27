@@ -8,17 +8,21 @@ body, html{
 
 li {
     width: 150px;
-    height:150px;
-    background:white;
-    border:8px solid #7C4726;
+    height: 150px;
+    background: white;
+    border: 8px solid #7C4726;
     border-radius: 50%;
-    display: table-cell;
-    vertical-align: middle;
 
-    cursor:pointer;
-
-    font:24px sans;
+    cursor: pointer;
+    font: 24px sans;
     font-weight: bold;
     color: #130C09;
+
+    padding-top: 40px;
+    vertical-align: top;
+    display: inline-block;
     text-align: center;
+    margin-right: 34px;
+    margin-bottom: 20px;
 }
+
