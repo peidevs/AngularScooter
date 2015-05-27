@@ -1,6 +1,6 @@
 'use strict';
 scooter.factory( 'config', function(){
-    this.theme = 'postit';
+    this.theme = 'scooter';
 
     this.themes = [
         { name: 'Scooter', path: 'scooter'},

@@ -2,6 +2,11 @@
 * Post It Note CSS comes from
 * http://code.tutsplus.com/tutorials/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934
 */
+
+body {
+    background-color: darkgray;
+}
+
 li {
     display: block;
     height: 8em;
@@ -51,6 +56,3 @@ li:nth-child(5n){
     top:-10px;
 }
 
-.loser {
-    visibility: hidden;
-}
