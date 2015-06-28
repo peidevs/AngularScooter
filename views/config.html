@@ -1,12 +1,12 @@
 <div class="configuration">
     <div class="row">
-        <span class="col-xs-5">
+        <span class="col-xs-4">
             Theme
             <select ng-options="item.path as item.name for item in themes" ng-model="selected"></select>
         </span>
 
-        <span class="col-xs-7">
-
+        <span class="col-xs-8">
+            <select ng-options="player.name for player in players" ng-model="selectedPlayers" multiple class="form-control" ></select>
         </span>
 
     </div>
