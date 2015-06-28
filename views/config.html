@@ -6,7 +6,7 @@
         </span>
 
         <span class="col-xs-8">
-            <select ng-options="player.name for player in players" ng-model="selectedPlayers" multiple class="form-control" ></select>
+            <select ng-options="player.name for player in players | filter:{isAlive:true}" ng-model="selectedPlayers" multiple class="form-control" ></select>
         </span>
 
     </div>
