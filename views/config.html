@@ -2,13 +2,18 @@
     <div class="row">
         <span class="col-xs-4">
             Theme
-            <select ng-options="item.path as item.name for item in themes" ng-model="selected"></select>
+            <select ng-options="item.path as item.name for item in themes" ng-model="selectedTheme"></select>
         </span>
 
         <span class="col-xs-8">
-            <select ng-options="player.name for player in players | filter:{isAlive:true}" ng-model="selectedPlayers" multiple class="form-control" ></select>
-            <select ng-options="player.name for player in players | filter:{isAlive:false}" ng-model="selectedPlayers" multiple class="form-control" ></select>
-
+            <div class="row">
+                <select ng-options="player.name for player in players | filter:{isAlive:true}" ng-model="selectedAlivePlayers" multiple class="col-xs-5"></select>
+                <div class="button-group-vertical col-xs-2">
+                    <button class="btn" ng-click="killPlayer()">&gt;&gt;</button>
+                    <button class="btn" ng-click="resurrectPlayer()">&lt;&lt;</button>
+                </div>
+                <select ng-options="player.name for player in players | filter:{isAlive:false}" ng-model="selectedDeadPlayers" multiple class="col-xs-5"></select>
+            </div>
         </span>
 
     </div>
