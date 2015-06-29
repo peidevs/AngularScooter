@@ -36,11 +36,7 @@ scooter.controller( 'ConfigurationModal', function($scope, $modalInstance, confi
 
     $scope.addPlayer = function() {
         if( $scope.playerToAdd ) {
-            $scope.players.push( { //TODO I don't like that config knows about attendee. Should be able to "new Player( name )"
-                name: $scope.playerToAdd,
-                isAlive : true
-            });
-
+            $scope.players.push( new Player( $scope.playerToAdd ));
             $scope.playerToAdd = "";
         }
     }

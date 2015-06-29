@@ -32,10 +32,7 @@ scooter.factory('attendees', function ($http) {
 
     $http.get('attendees.json').then(function (result) {
         result.data.forEach(function (attendee) {
-            self.attendees.push({
-                name: attendee.name,
-                isAlive: true
-            })
+            self.attendees.push( new Player( attendee.name ));
         });
 
         randomizeAttendees();
