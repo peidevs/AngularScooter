@@ -55,4 +55,14 @@ li:nth-child(5n){
     position:relative;
     top:-10px;
 }
+li:nth-child(7n){
+    -webkit-transform: rotate(6deg);
+    -moz-transform: rotate(6deg);
+    -ms-transform: rotate(6deg);
+    -o-transform: rotate(6deg);
+    transform: rotate(6deg);
+    position:relative;
+    top:-7px;
+    background: #ffa195
+}
 
