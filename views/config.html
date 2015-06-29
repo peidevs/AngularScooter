@@ -1,20 +1,22 @@
 <div class="configuration">
     <div class="row">
-        <span class="col-xs-4">
-            Theme
-            <select ng-options="item.path as item.name for item in themes" ng-model="selectedTheme"></select>
+        <span class="col-xs-12 form-group">
+            <label for="theme-select">Theme</label>
+            <select ng-options="item.path as item.name for item in themes" ng-model="selectedTheme"
+                    id="theme-select"></select>
         </span>
+    </div>
 
-        <span class="col-xs-8">
-            <div class="row">
-                <select ng-options="player.name for player in players | filter:{isAlive:true}" ng-model="selectedAlivePlayers" multiple class="col-xs-5"></select>
-                <div class="button-group-vertical col-xs-2">
-                    <button class="btn" ng-click="killPlayer()">&gt;&gt;</button>
-                    <button class="btn" ng-click="resurrectPlayer()">&lt;&lt;</button>
-                </div>
-                <select ng-options="player.name for player in players | filter:{isAlive:false}" ng-model="selectedDeadPlayers" multiple class="col-xs-5"></select>
-            </div>
-        </span>
+    <div class="row">
+        <select ng-options="player.name for player in players | filter:{isAlive:true}"
+                ng-model="selectedAlivePlayers" multiple size="8" class="col-xs-5"></select>
+
+        <div class="button-group-vertical col-xs-2 text-center">
+            <button class="btn btn-warning btn-block" ng-click="killPlayer()">&gt;&gt;</button>
+            <button class="btn btn-info btn-block" ng-click="resurrectPlayer()">&lt;&lt;</button>
+        </div>
+        <select ng-options="player.name for player in players | filter:{isAlive:false}"
+                ng-model="selectedDeadPlayers" multiple size="8" class="col-xs-5"></select>
 
     </div>
 
