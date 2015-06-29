@@ -7,26 +7,25 @@
         </span>
     </div>
 
-    <div class="row">
-        <select ng-options="player.name for player in players | filter:{isAlive:true}"
-                ng-model="selectedAlivePlayers" multiple size="8" class="col-xs-5"
-                ng-dblclick="killPlayer()"></select>
+    <label class="col-xs-7">Alive Players</label>
+    <label class="col-xs-5">Dead Players</label>
 
-        <div class="button-group-vertical col-xs-2 text-center">
-            <button class="btn btn-warning btn-block" ng-click="killPlayer()">&gt;&gt;</button>
-            <button class="btn btn-info btn-block" ng-click="resurrectPlayer()">&lt;&lt;</button>
-        </div>
-        <select ng-options="player.name for player in players | filter:{isAlive:false}"
-                ng-model="selectedDeadPlayers" multiple size="8" class="col-xs-5"
-                ng-dblclick="resurrectPlayer()"></select>
+    <select ng-options="player.name for player in players | filter:{isAlive:true}"
+            ng-model="selectedAlivePlayers" multiple size="8" class="col-xs-5"
+            ng-dblclick="killPlayer()"></select>
 
+    <div class="button-group-vertical col-xs-2 text-center">
+        <button class="btn btn-warning btn-block" ng-click="killPlayer()">&gt;&gt;</button>
+        <button class="btn btn-info btn-block" ng-click="resurrectPlayer()">&lt;&lt;</button>
     </div>
 
+    <select ng-options="player.name for player in players | filter:{isAlive:false}"
+            ng-model="selectedDeadPlayers" multiple size="8" class="col-xs-5"
+            ng-dblclick="resurrectPlayer()"></select>
     <div class="row">
-        <div class="btn-group col-xs-offset-8 col-xs-4">
-            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-            <button class="btn btn-primary" ng-click="save()">Save</button>
+        <div class="btn-group col-xs-4 pull-right stupidButtonsGiveMeTopPadding">
+            <button class="btn btn-primary pull-right" ng-click="save()">Save</button>
+            <button class="btn btn-default pull-right" ng-click="cancel()">Cancel</button>
         </div>
     </div>
-
 </div>

@@ -18,3 +18,7 @@ ul, li {
 .loser {
     visibility: hidden;
 }
+
+.stupidButtonsGiveMeTopPadding {
+    padding-top: 15px;
+}
