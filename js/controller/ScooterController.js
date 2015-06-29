@@ -14,8 +14,11 @@ scooter.controller('ScooterController', function ($scope, $modal, attendees, con
             controller: 'ConfigurationModal'
         });
 
-        modalHandle.result.then( function( theme ){
-            $scope.theme = theme;
+        modalHandle.result.then( function( results ){
+            $scope.theme = results.theme;
+
+            attendees.update( results.attendees );
+            $scope.attendees = results.attendees;
         });
     }
 });

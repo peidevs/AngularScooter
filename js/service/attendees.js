@@ -46,6 +46,10 @@ scooter.factory('attendees', function ($http) {
             return self.attendees;
         },
 
+        update : function( players ){
+            self.attendees = players;
+        },
+
         play : function(){
             self.attendees.forEach( function( attendee){
                 if( !doesWinnerExist() && isLoserThisRound() ){

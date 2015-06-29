@@ -3,7 +3,7 @@ scooter.controller( 'ConfigurationModal', function($scope, $modalInstance, confi
     $scope.themes = config.themes;
     $scope.selectedTheme = angular.copy( config.theme );
 
-    $scope.players = attendees.get();
+    $scope.players = angular.copy( attendees.get());
     $scope.selectedAlivePlayers = [];
     $scope.selectedDeadPlayers = [];
 
@@ -13,7 +13,10 @@ scooter.controller( 'ConfigurationModal', function($scope, $modalInstance, confi
 
     $scope.save = function(){
         config.theme = $scope.selectedTheme;
-        $modalInstance.close( $scope.selectedTheme );
+        $modalInstance.close( {
+            theme : $scope.selectedTheme,
+            attendees : $scope.players
+        });
 
     };
 
