@@ -8,21 +8,21 @@ scooter.factory('attendees', function ($http) {
         return x;
     };
 
-    var doesWinnerExist = function(){
-        var numberPlayersStillInGame = self.attendees.filter( function( attendee){
+    var doesWinnerExist = function () {
+        var numberPlayersStillInGame = self.attendees.filter(function (attendee) {
             return attendee.isAlive;
         }).length;
 
         return (numberPlayersStillInGame <= 1);
     };
 
-    var isLoserThisRound = function(){
+    var isLoserThisRound = function () {
         return (getRandom(1, 4) === 1);
     };
 
-    var randomizeAttendees = function(){
+    var randomizeAttendees = function () {
         for (var i = 0; i < self.attendees.length; i++) {
-            var j = getRandom(0, (self.attendees.length -1) );
+            var j = getRandom(0, (self.attendees.length - 1));
             var temp = self.attendees[i];
             self.attendees[i] = self.attendees[j];
             self.attendees[j] = temp;
@@ -32,33 +32,40 @@ scooter.factory('attendees', function ($http) {
 
     $http.get('attendees.json').then(function (result) {
         result.data.forEach(function (attendee) {
-            self.attendees.push( new Player( attendee.name ));
+            self.attendees.push(new Player(attendee.name));
         });
 
         randomizeAttendees();
     });
 
     return {
-        get : function(){
+        get: function () {
             return self.attendees;
         },
 
-        update : function( players ){
+        update: function (players) {
             self.attendees = players;
         },
 
-        play : function(){
-            self.attendees.forEach( function( attendee){
-                if( !doesWinnerExist() && isLoserThisRound() ){
-                   attendee.isAlive = false;
-                };
+        play: function () {
+            self.attendees.forEach(function (attendee) {
+                if (!doesWinnerExist() && isLoserThisRound()) {
+                    attendee.isAlive = false;
+                }
             });
+
+            if (doesWinnerExist()) {
+                self.attendees.forEach(function( attendee ){
+                   attendee.isWinner = attendee.isAlive; //winner is the only one alive
+                });
+            }
         },
 
-        reset : function () {
-            self.attendees.forEach( function( attendee ){
+        reset: function () {
+            self.attendees.forEach(function (attendee) {
                 attendee.isAlive = true;
-            } );
+                attendee.isWinner = false;
+            });
 
             randomizeAttendees();
         }
