@@ -1,5 +1,6 @@
 # Scooter
-Scooter is a game used at the monthly PEI Developers meetup to help us pick winners of our door prizes.
+Scooter is a game used at the monthly PEI Developers meetup to help us pick winners of our door prizes. This version is the angular js port of the original dojo version of scooter
+
 Version 0.1 Beta
 
 #Usage
