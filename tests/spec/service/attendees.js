@@ -3,6 +3,25 @@ describe("attendees", function () {
     var httpBackend;
     var users = [{name: 'foo'}, {name: 'bar'}];
 
+    var isAnyPlayerAWinner = function (players) {
+        return players.some(function (player) {
+            return player.isWinner;
+        });
+    };
+
+    var isAnyPlayerAlive = function (players) {
+        return players.some(function (player) {
+            return player.isAlive;
+        });
+    };
+
+    var areAllPlayersAlive = function (players) {
+        return players.every(function (player) {
+            return player.isAlive;
+        })
+    };
+
+
     beforeEach(module('scooter'));
 
     beforeEach(inject(function ($injector) {
@@ -19,19 +38,15 @@ describe("attendees", function () {
         it("returns a list of attendees that are all alive", function () {
             httpBackend.flush();
 
-            var actual = attendees.get();
-            var names = actual.map(function (attendee) {
-                return attendee.name;
+            var players = attendees.get();
+            var names = players.map(function (player) {
+                return player.name;
             });
 
-            var areAllPlayersAlive = actual.every(function (attendee) {
-                return attendee.isAlive;
-            });
-
-            expect(actual.length).toBe(2);
+            expect(players.length).toBe(2);
             expect(names).toContain(users[0].name);
             expect(names).toContain(users[1].name);
-            expect(areAllPlayersAlive).toBeTruthy();
+            expect(areAllPlayersAlive(players)).toBeTruthy();
         });
     });
 
@@ -39,17 +54,27 @@ describe("attendees", function () {
 
         it("sets all policies back to alive", function () {
             httpBackend.flush();
-            var actual = attendees.get();
+            var players = attendees.get();
 
-            actual[0].isAlive = false;
+            players[0].isAlive = false;
 
             attendees.reset();
 
-            var areAllPlayersAlive = actual.every(function (attendee) {
-                return attendee.isAlive;
-            });
+            expect(areAllPlayersAlive(players)).toBeTruthy();
+        });
 
-            expect(areAllPlayersAlive).toBeTruthy();
+        it("There are no winners after a reset", function () {
+            httpBackend.flush();
+            spyOn(Math, 'random').and.returnValue(0.1);
+
+            var players = attendees.get();
+
+            attendees.play(); //2 players, one is forced dead because of mock random
+
+            attendees.reset();
+
+            expect(areAllPlayersAlive(players)).toBeTruthy();
+            expect(isAnyPlayerAWinner(players)).toBeFalsy();
         });
     });
 
@@ -59,7 +84,7 @@ describe("attendees", function () {
 
     describe("play()", function () {
 
-        beforeEach( function(){
+        beforeEach(function () {
             httpBackend.flush();
             spyOn(Math, 'random').and.returnValue(0.1);
         });
@@ -67,46 +92,30 @@ describe("attendees", function () {
         it("A player can lose in a round", function () {
 
             attendees.play();
-            var actual = attendees.get();
+            var players = attendees.get();
 
-            var isAnyPlayerDead = actual.some(function (attendee) {
-                return !attendee.isAlive;
-            });
-
-            expect(isAnyPlayerDead).toBeTruthy();
+            expect(areAllPlayersAlive(players)).toBeFalsy();
         });
 
-        it( "When there is only one player left, they are the winner", function(){
+        it("When there is only one player left, they are the winner", function () {
 
             attendees.play();
-            var actual = attendees.get();
+            var players = attendees.get();
 
-            var isAnyPlayerAWinner = actual.some(function (attendee) {
-                return attendee.isWinner;
-            });
-
-            expect(isAnyPlayerAWinner).toBeTruthy();
+            expect(isAnyPlayerAWinner(players)).toBeTruthy();
         });
 
-        it( "When a player wins, they can not lose", function(){
+        it("When a player wins, they can not lose", function () {
             //play a bunch to simulate trying to kill every player
             attendees.play();
             attendees.play();
             attendees.play();
             attendees.play();
 
-            var actual = attendees.get();
+            var players = attendees.get();
 
-            var areAnyPlayersAlive = actual.some(function (attendee) {
-                return attendee.isAlive;
-            });
-
-            var isAnyPlayerAWinner = actual.some(function (attendee) {
-                return attendee.isWinner;
-            });
-
-            expect(areAnyPlayersAlive).toBeTruthy();
-            expect(isAnyPlayerAWinner).toBeTruthy();
+            expect(isAnyPlayerAlive(players)).toBeTruthy();
+            expect(isAnyPlayerAWinner(players)).toBeTruthy();
         });
 
     });
