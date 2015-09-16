@@ -11,3 +11,7 @@ Here is an example of running the code from the pythin simple http server (assum
 $ cd /home/workspace/Scooter
 $ python -m SimpleHTTPServer
 ```
+or for python3 
+```
+python3 -m http.server
+```
