@@ -15,3 +15,16 @@ or for python3
 ```
 python3 -m http.server
 ```
+
+#Update Contact List
+The list of contacts is stored in the attendees.json file. Modify this file with the list of attendees for your game. Reload the page and you should see the new players
+
+#Playing the Game
+Click the play button. Continue clicking until there is only 1 player left.
+
+#Reset the Game
+Click reset and all the players will be added back to the game and shuffled on the board
+
+#Scooter Config
+In the game, the config menu will allow you to manage players and choose a new theme. You can manually add players, make them lose or give them a second chance.
+Note - If you refresh the browser you will lose any players added in the config menu.
