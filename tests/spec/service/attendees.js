@@ -16,7 +16,6 @@ describe( "attendees", function(){
 
     describe("get()", function(){
 
-
         it("returns a list of attendees", function(){
             httpBackend.flush();
 
