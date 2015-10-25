@@ -72,6 +72,14 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
         }
     };
 
+    $scope.removePlayer = function(){
+        $scope.players = $scope.players.filter( function(player){
+           return !$scope.selectedDeadPlayers.some( function(selectedDeadPlayer){
+               return selectedDeadPlayer.name === player.name && !player.isAlive;
+           });
+        });
+    };
+
     $scope.retrievePlayers = function() {
 
         $scope.isLoading = true;
@@ -88,6 +96,7 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
             {
                 var guests = meetupService.retrieveGuests( results.attendees );
                 results.attendees = results.attendees.concat( guests );
+
                 var rawNumberOfGuests = results.attendees.length;
 
                 results.attendees = meetupService.filterElders( results.attendees, results.elders );
