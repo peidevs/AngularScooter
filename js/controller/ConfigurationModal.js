@@ -74,6 +74,8 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
 
     $scope.retrievePlayers = function() {
 
+        $scope.isLoading = true;
+
         meetupService.retrieveEvent( $scope.apiKey, $scope.groupName, $scope.meetupDate).then( function eventSuccess(event)
         {
             var attendeePromise = meetupService.retrieveAttendees( $scope.apiKey, event.id );
@@ -86,22 +88,26 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
             {
                 var guests = meetupService.retrieveGuests( results.attendees );
                 results.attendees = results.attendees.concat( guests );
+                var rawNumberOfGuests = results.attendees.length;
 
-                var attending = meetupService.filterElders( results.attendees, results.elders );
+                results.attendees = meetupService.filterElders( results.attendees, results.elders );
 
-                $scope.players = attending.map( function( rsvp ){
+                $scope.players = results.attendees.map( function( rsvp ){
                     return new Player( rsvp.member.name );
                 });
 
-                $scope.meetupStatus = "Loaded Event - " + event.name + " " + attending.length + " attending. (" + results.attendees.length + " Raw)";
+                $scope.meetupStatus = "Loaded Event - " + event.name + " " + results.attendees.length + " attending. (" + rawNumberOfGuests + " Raw)";
                 $scope.isMeetupError = false;
+                $scope.isLoading = false;
             }, function(error){
                 $scope.meetupStatus = error.problem || 'Unexpected error loading events';
                 $scope.isMeetupError = true;
+                $scope.isLoading = false;
             } );
         }, function failure(error){
             $scope.meetupStatus = error.problem || 'Unexpected error loading events';
             $scope.isMeetupError = true;
+            $scope.isLoading = false;
         });
     }
 

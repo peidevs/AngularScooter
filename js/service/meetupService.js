@@ -68,11 +68,13 @@ scooter.factory( 'meetupService', function( $http ){
     };
 
     this.filterElders = function( attendees, elders ){
-        attendees.filter( function(rsvp){
+        var attending = attendees.filter( function(rsvp){
             return !elders.some( function(elder){
                 return elder.member_id === rsvp.member.member_id;
             });
         });
+
+        return attending;
     };
 
     return this;
