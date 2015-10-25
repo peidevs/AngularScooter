@@ -76,28 +76,24 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
 
         meetupService.retrieveEvent( $scope.apiKey, $scope.groupName, $scope.meetupDate).then( function eventSuccess(event)
         {
-            var attendeePromise = meetupService.retrieveAttendees( $scope.apiKey, event.id);
-            var elderPromise = meetupService.retrieveElders($scope.apiKey, $scope.groupName);
+            var attendeePromise = meetupService.retrieveAttendees( $scope.apiKey, event.id );
+            var elderPromise = meetupService.retrieveElders( $scope.apiKey, $scope.groupName );
 
             $q.all( {
                 attendees : attendeePromise,
                 elders : elderPromise
             }).then( function( results )
             {
-                //Add +1
+                var guests = meetupService.retrieveGuests( results.attendees );
+                results.attendees = results.attendees.concat( guests );
 
-                //Filter Elders
-                var attending = results.attendees.filter( function(rsvp){
-                    return !results.elders.some( function(elder){
-                        return elder.member_id === rsvp.member.member_id;
-                    });
+                var attending = meetupService.filterElders( results.attendees, results.elders );
+
+                $scope.players = attending.map( function( rsvp ){
+                    return new Player( rsvp.member.name );
                 });
 
-                $scope.players = attending.map( function(rsvp){
-                    return new Player(rsvp.member.name);
-                });
-
-                $scope.meetupStatus = "Loaded Event - " + event.name + " " + results.attendees.length + " attending";
+                $scope.meetupStatus = "Loaded Event - " + event.name + " " + attending.length + " attending. (" + results.attendees.length + " Raw)";
                 $scope.isMeetupError = false;
             }, function(error){
                 $scope.meetupStatus = error.problem || 'Unexpected error loading events';
@@ -107,7 +103,6 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
             $scope.meetupStatus = error.problem || 'Unexpected error loading events';
             $scope.isMeetupError = true;
         });
-
     }
 
 });

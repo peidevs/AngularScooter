@@ -1,7 +1,7 @@
 'use strict';
 scooter.factory( 'meetupService', function( $http ){
     var eventsUrl = "https://api.meetup.com/2/events?key={key}&group_urlname={name}&time={time}&callback=JSON_CALLBACK";
-    var attendeeUrl = "https://api.meetup.com/2/rsvps?key={key}&event_id={eventId}&callback=JSON_CALLBACK";
+    var attendeeUrl = "https://api.meetup.com/2/rsvps?key={key}&event_id={eventId}&rsvp=yes&callback=JSON_CALLBACK";
     var eldersUrl = "https://api.meetup.com/2/profiles?key={key}&group_urlname={name}&role=leads&callback=JSON_CALLBACK";
 
     this.retrieveEvent = function(apiKey, groupName, meetupDate ){
@@ -48,6 +48,31 @@ scooter.factory( 'meetupService', function( $http ){
             return elders.data.results;
         });
 
+    };
+
+    this.retrieveGuests = function( attendees ){
+        var guests = [];
+
+        attendees.forEach( function( attendee ){
+            for(var i=1; i<= attendee.guests; i++ ){
+                guests.push( {
+                    'member' : {
+                        'member_id' : -1,
+                        'name' : (attendee.member.name + ' +' + i)
+                    }
+                });
+            }
+        });
+
+        return guests;
+    };
+
+    this.filterElders = function( attendees, elders ){
+        attendees.filter( function(rsvp){
+            return !elders.some( function(elder){
+                return elder.member_id === rsvp.member.member_id;
+            });
+        });
     };
 
     return this;
