@@ -28,13 +28,26 @@ scooter.factory( 'meetupService', function( $http ){
     this.retrieveAttendees = function(apiKey, eventId){
         var url = attendeeUrl.replace('{key}', apiKey).replace('{eventId}', eventId);
 
-      return $http.jsonp(url).then( function retrieveAttendessCallback(attendees){
+        return $http.jsonp(url).then( function retrieveAttendessCallback(attendees){
           if(attendees.status !== 200 || (attendees.data.status && attendees.data.status !== 200)){
               throw events.data;
           }
 
           return attendees.data.results;
       });
+    };
+
+    this.retrieveElders = function(apiKey, groupName){
+        var url = eldersUrl.replace('{key}', apiKey).replace('{name}', groupName);
+
+        return $http.jsonp(url).then( function retrieveEldersCallback(elders){
+            if(elders.status !== 200 || (elders.data.status && elders.data.status !== 200)){
+                throw events.data;
+            }
+
+            return elders.data.results;
+        });
+
     };
 
     return this;
