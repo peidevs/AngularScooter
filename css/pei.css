@@ -2,7 +2,7 @@ body, html{
     background:#F7C636;
 }
 
-li {
+.playerList li {
     font:24px sans;
     font-weight: bold;
 

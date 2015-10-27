@@ -1,5 +1,5 @@
 'use strict';
-scooter.controller('ConfigurationModal', function ($scope, $modalInstance, config, attendees) {
+scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, config, attendees, meetupService) {
     $scope.themes = config.themes;
     $scope.selectedTheme = angular.copy(config.theme);
 
@@ -8,6 +8,8 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, confi
     $scope.selectedDeadPlayers = [];
 
     $scope.playerToAdd = "";
+
+    $scope.isMeetupError = false;
 
     $scope.cancel = function () {
         $modalInstance.dismiss();
@@ -68,6 +70,54 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, confi
             $scope.players.push(new Player($scope.playerToAdd));
             $scope.playerToAdd = "";
         }
+    };
+
+    $scope.removePlayer = function(){
+        $scope.players = $scope.players.filter( function(player){
+           return !$scope.selectedDeadPlayers.some( function(selectedDeadPlayer){
+               return selectedDeadPlayer.name === player.name && !player.isAlive;
+           });
+        });
+    };
+
+    $scope.retrievePlayers = function() {
+
+        $scope.isLoading = true;
+
+        meetupService.retrieveEvent( $scope.apiKey, $scope.groupName, $scope.meetupDate).then( function eventSuccess(event)
+        {
+            var attendeePromise = meetupService.retrieveAttendees( $scope.apiKey, event.id );
+            var elderPromise = meetupService.retrieveElders( $scope.apiKey, $scope.groupName );
+
+            $q.all( {
+                attendees : attendeePromise,
+                elders : elderPromise
+            }).then( function( results )
+            {
+                var guests = meetupService.retrieveGuests( results.attendees );
+                results.attendees = results.attendees.concat( guests );
+
+                var rawNumberOfGuests = results.attendees.length;
+
+                results.attendees = meetupService.filterElders( results.attendees, results.elders );
+
+                $scope.players = results.attendees.map( function( rsvp ){
+                    return new Player( rsvp.member.name );
+                });
+
+                $scope.meetupStatus = "Loaded Event - " + event.name + " " + results.attendees.length + " attending. (" + rawNumberOfGuests + " Raw)";
+                $scope.isMeetupError = false;
+                $scope.isLoading = false;
+            }, function(error){
+                $scope.meetupStatus = error.problem || 'Unexpected error loading events';
+                $scope.isMeetupError = true;
+                $scope.isLoading = false;
+            } );
+        }, function failure(error){
+            $scope.meetupStatus = error.problem || 'Unexpected error loading events';
+            $scope.isMeetupError = true;
+            $scope.isLoading = false;
+        });
     }
 
 });
