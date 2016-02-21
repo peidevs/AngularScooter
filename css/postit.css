@@ -69,6 +69,11 @@ li:nth-child(7n) {
     background: #ffa195
 }
 
+.winner {
+    -webkit-animation: wobble 2s infinite;
+    animation: wobble 2s infinite;
+}
+
 .loser {
     transition: visibility 0s 0.9s, opacity 0.9s linear;
     -webkit-animation: tinDownOut 1s;
@@ -107,5 +112,37 @@ li:nth-child(7n) {
     100% {
         opacity: 0;
         transform: scale(1, 1) translateY(900%);
+    }
+}
+
+/* Animation taken from https://gist.github.com/tbeseda/1763287 */
+
+@-webkit-keyframes wobble {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    20% {
+        -webkit-transform: rotate(4deg);
+    }
+    50% {
+        -webkit-transform: rotate(-4deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+@keyframes wobble {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(4deg);
+    }
+    50% {
+        transform: rotate(-4deg);
+    }
+    100% {
+        transform: rotate(0deg);
     }
 }
