@@ -70,7 +70,7 @@ li:nth-child(7n) {
 }
 
 .loser {
-    transition: visibility 0s 1s, opacity 1s linear;
+    transition: visibility 0s 0.9s, opacity 0.9s linear;
     -webkit-animation: tinDownOut 1s;
     animation: tinDownOut 1s;
 }
