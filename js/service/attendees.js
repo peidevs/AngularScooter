@@ -29,12 +29,19 @@ scooter.factory('attendees', function ($http) {
         }
     };
 
-    var loadPlayers = function(){
-        var storedAttendees = JSON.parse( localStorage.getItem("attendees") );
-        if( storedAttendees ){
-            storedAttendees.forEach( function(attendee){
+    var loadPlayers = function() {
+        var storedPlayers = localStorage.getItem("attendees");
+
+        try {
+            var storedAttendees = JSON.parse(storedPlayers);
+            storedAttendees.forEach(function (attendee) {
                 self.attendees.push(new Player(attendee.name));
             });
+        }catch(error){
+            console.log("clearing local storage so issue doesn't continue");
+            localStorage.clear();
+
+            self.attendees = [];
         }
     }
 
