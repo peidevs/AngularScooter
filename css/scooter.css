@@ -27,8 +27,6 @@ body.scooter{
 }
 
 .scooter .winner {
-    animation: spin 4s linear infinite;
-.winner {
     animation: spin 2s linear infinite;
 }
 
