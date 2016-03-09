@@ -26,7 +26,7 @@ body.postit {
     -webkit-box-shadow: 3px 3px 5px rgba(30,30,30,.7);
 }
 
-.postit li:nth-child(even){
+.postit .playerList li:nth-child(even){
     -webkit-transform: rotate(4deg);
     -moz-transform: rotate(4deg);
     -ms-transform: rotate(4deg);
@@ -36,7 +36,7 @@ body.postit {
     top:5px;
     background: #CCFFCC;
 }
-.postit li:nth-child(3n){
+.postit .playerList li:nth-child(3n){
     -webkit-transform: rotate(-3deg);
     -moz-transform: rotate(-3deg);
     -ms-transform: rotate(-3deg);
@@ -46,7 +46,7 @@ body.postit {
     top:-5px;
     background: #CCCCFF
 }
-.postit li:nth-child(5n){
+.postit .playerList li:nth-child(5n){
     -webkit-transform: rotate(5deg);
     -moz-transform: rotate(5deg);
     -ms-transform: rotate(5deg);
@@ -55,7 +55,7 @@ body.postit {
     position:relative;
     top:-10px;
 }
-.postit li:nth-child(7n){
+.postit .playerList li:nth-child(7n){
     -webkit-transform: rotate(6deg);
     -moz-transform: rotate(6deg);
     -ms-transform: rotate(6deg);
