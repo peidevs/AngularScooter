@@ -21,9 +21,9 @@ body.postit {
     font-size: 1.2em;
     text-align: center;
 
-    box-shadow: 3px 3px 5px rgba(30,30,30,.7);
-    -moz-box-shadow: 3px 3px 5px rgba(30,30,30,.7);
-    -webkit-box-shadow: 3px 3px 5px rgba(30,30,30,.7);
+    box-shadow: 3px 3px 5px rgba(30, 30, 30, .7);
+    -moz-box-shadow: 3px 3px 5px rgba(30, 30, 30, .7);
+    -webkit-box-shadow: 3px 3px 5px rgba(30, 30, 30, .7);
 }
 
 .postit .playerList li:nth-child(even){
@@ -32,8 +32,8 @@ body.postit {
     -ms-transform: rotate(4deg);
     -o-transform: rotate(4deg);
     transform: rotate(4deg);
-    position:relative;
-    top:5px;
+    position: relative;
+    top: 5px;
     background: #CCFFCC;
 }
 .postit .playerList li:nth-child(3n){
@@ -42,8 +42,8 @@ body.postit {
     -ms-transform: rotate(-3deg);
     -o-transform: rotate(-3deg);
     transform: rotate(-3deg);
-    position:relative;
-    top:-5px;
+    position: relative;
+    top: -5px;
     background: #CCCCFF
 }
 .postit .playerList li:nth-child(5n){
@@ -52,8 +52,8 @@ body.postit {
     -ms-transform: rotate(5deg);
     -o-transform: rotate(5deg);
     transform: rotate(5deg);
-    position:relative;
-    top:-10px;
+    position: relative;
+    top: -10px;
 }
 .postit .playerList li:nth-child(7n){
     -webkit-transform: rotate(6deg);
@@ -61,8 +61,85 @@ body.postit {
     -ms-transform: rotate(6deg);
     -o-transform: rotate(6deg);
     transform: rotate(6deg);
-    position:relative;
-    top:-7px;
+    position: relative;
+    top: -7px;
     background: #ffa195
 }
 
+.winner {
+    -webkit-animation: wobble 2s infinite;
+    animation: wobble 2s infinite;
+}
+
+.loser {
+    transition: visibility 0s 0.9s, opacity 0.9s linear;
+    -webkit-animation: tinDownOut 1s;
+    animation: tinDownOut 1s;
+}
+
+/* Animation from https://github.com/miniMAC/magic/blob/master/magic.css */
+@-webkit-keyframes tinDownOut {
+    0%, 20%, 40%, 50% {
+        opacity: 1;
+        -webkit-transform: scale(1, 1) translateY(0);
+    }
+
+    10%, 30% {
+        opacity: 1;
+        -webkit-transform: scale(1.1, 1.1) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1, 1) translateY(900%);
+    }
+}
+
+@keyframes tinDownOut {
+    0%, 20%, 40%, 50% {
+        opacity: 1;
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10%, 30% {
+        opacity: 1;
+        transform: scale(1.1, 1.1) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1, 1) translateY(900%);
+    }
+}
+
+/* Animation taken from https://gist.github.com/tbeseda/1763287 */
+
+@-webkit-keyframes wobble {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    20% {
+        -webkit-transform: rotate(4deg);
+    }
+    50% {
+        -webkit-transform: rotate(-4deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+@keyframes wobble {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(4deg);
+    }
+    50% {
+        transform: rotate(-4deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}

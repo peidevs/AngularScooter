@@ -28,6 +28,21 @@ body.scooter{
 
 .scooter .winner {
     animation: spin 4s linear infinite;
+.winner {
+    animation: spin 2s linear infinite;
+}
+
+.loser {
+    opacity: 0;
+    transition: visibility 0s 0.5s, opacity 0.5s linear;
+    -webkit-transform: scale(1.6, 1.6);
+    -moz-transform: scale(1.6, 1.6);
+    -ms-transform: scale(1.6, 1.6);
+    -o-transform: scale(1.6, 1.6);
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
 }
 
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
