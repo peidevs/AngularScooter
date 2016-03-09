@@ -19,6 +19,7 @@ scooter.controller('ScooterController', function ($scope, $modal, attendees, con
 
             attendees.update( results.attendees );
             $scope.attendees = results.attendees;
+            localStorage.setItem("attendees", JSON.stringify( results.attendees ));
         });
     }
 });
