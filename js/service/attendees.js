@@ -29,22 +29,17 @@ scooter.factory('attendees', function ($http) {
         }
     };
 
-    var storedAttendees = JSON.parse( localStorage.getItem("attendees") );
-    if( storedAttendees ){
-        storedAttendees.forEach( function( attendee){
-            self.attendees.push(new Player(attendee.name));
-        });
+    var loadPlayers = function(){
+        var storedAttendees = JSON.parse( localStorage.getItem("attendees") );
+        if( storedAttendees ){
+            storedAttendees.forEach( function(attendee){
+                self.attendees.push(new Player(attendee.name));
+            });
+        }
     }
 
+    loadPlayers();
     randomizeAttendees();
-
-    //$http.get('attendees.json').then(function (result) {
-    //    result.data.forEach(function (attendee) {
-    //        self.attendees.push(new Player(attendee.name));
-    //    });
-    //
-    //    randomizeAttendees();
-    //});
 
     return {
         get: function () {
