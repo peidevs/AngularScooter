@@ -3,11 +3,11 @@
 * http://code.tutsplus.com/tutorials/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934
 */
 
-body {
+body.postit {
     background-color: darkgray;
 }
 
-.playerList li {
+.postit .playerList li {
     display: block;
     height: 8em;
     width: 12em;
@@ -26,7 +26,7 @@ body {
     -webkit-box-shadow: 3px 3px 5px rgba(30, 30, 30, .7);
 }
 
-li:nth-child(even) {
+.postit .playerList li:nth-child(even){
     -webkit-transform: rotate(4deg);
     -moz-transform: rotate(4deg);
     -ms-transform: rotate(4deg);
@@ -36,8 +36,7 @@ li:nth-child(even) {
     top: 5px;
     background: #CCFFCC;
 }
-
-li:nth-child(3n) {
+.postit .playerList li:nth-child(3n){
     -webkit-transform: rotate(-3deg);
     -moz-transform: rotate(-3deg);
     -ms-transform: rotate(-3deg);
@@ -47,8 +46,7 @@ li:nth-child(3n) {
     top: -5px;
     background: #CCCCFF
 }
-
-li:nth-child(5n) {
+.postit .playerList li:nth-child(5n){
     -webkit-transform: rotate(5deg);
     -moz-transform: rotate(5deg);
     -ms-transform: rotate(5deg);
@@ -57,8 +55,7 @@ li:nth-child(5n) {
     position: relative;
     top: -10px;
 }
-
-li:nth-child(7n) {
+.postit .playerList li:nth-child(7n){
     -webkit-transform: rotate(6deg);
     -moz-transform: rotate(6deg);
     -ms-transform: rotate(6deg);

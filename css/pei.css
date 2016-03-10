@@ -1,8 +1,8 @@
-body, html{
+body.pei{
     background:#F7C636;
 }
 
-.playerList li {
+.pei .playerList li {
     font:24px sans;
     font-weight: bold;
 
