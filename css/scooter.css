@@ -30,7 +30,7 @@ body.scooter{
     animation: spin 2s linear infinite;
 }
 
-.loser {
+.scooter .loser {
     opacity: 0;
     transition: visibility 0s 0.5s, opacity 0.5s linear;
     -webkit-transform: scale(1.6, 1.6);
