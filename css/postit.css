@@ -66,12 +66,12 @@ body.postit {
     background: #ffa195
 }
 
-.winner {
+.postit .winner {
     -webkit-animation: wobble 2s infinite;
     animation: wobble 2s infinite;
 }
 
-.loser {
+.postit .loser {
     transition: visibility 0s 0.9s, opacity 0.9s linear;
     -webkit-animation: tinDownOut 1s;
     animation: tinDownOut 1s;
