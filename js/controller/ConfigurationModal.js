@@ -95,14 +95,21 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
             }).then( function( results )
             {
                 var guests = meetupService.retrieveGuests( results.attendees );
+
                 results.attendees = results.attendees.concat( guests );
+
+
 
                 var rawNumberOfGuests = results.attendees.length;
 
                 results.attendees = meetupService.filterElders( results.attendees, results.elders );
 
                 $scope.players = results.attendees.map( function( rsvp ){
-                    return new Player( rsvp.member.name );
+                    var photo_link = "http://img2.meetupstatic.com/img/458386242735519287330/noPhoto_50.png";
+                    if (rsvp.member_photo) {
+                        photo_link = rsvp.member_photo.thumb_link;
+                    }
+                    return new Player( rsvp.member.name, photo_link);
                 });
 
                 $scope.meetupStatus = "Loaded Event - " + event.name + " " + results.attendees.length + " attending. (" + rawNumberOfGuests + " Raw)";

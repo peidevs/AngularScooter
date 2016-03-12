@@ -53,12 +53,20 @@ scooter.factory( 'meetupService', function( $http ){
     this.retrieveGuests = function( attendees ){
         var guests = [];
 
+
         attendees.forEach( function( attendee ){
             for(var i=1; i<= attendee.guests; i++ ){
+                var photo_link = "http://img2.meetupstatic.com/img/458386242735519287330/noPhoto_50.png";
+                if (attendee.member_photo) {
+                    photo_link = attendee.member_photo.thumb_link;
+                };
                 guests.push( {
                     'member' : {
                         'member_id' : -1,
                         'name' : (attendee.member.name + ' +' + i)
+                    },
+                    'member_photo' : {
+                        'thumb_link' : photo_link
                     }
                 });
             }

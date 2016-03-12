@@ -20,6 +20,8 @@
         <ul class="playerList">
             <li ng-repeat="attendee in attendees" ng-class="{'loser': !attendee.isAlive, 'winner': attendee.isWinner}">
                 {{attendee.name}}
+                <img class="player_profile_picture" ng-src="{{attendee.photo_link}}">
+
             </li>
         </ul>
     </div>

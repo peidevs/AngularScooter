@@ -7,6 +7,7 @@ ul, li {
     list-style: none;
 }
 
+
 .chunk {
     padding-top: 15px;
 }
@@ -25,4 +26,18 @@ ul, li {
 
 .tab-pane {
     padding: 10px;
+}
+
+li {
+	overflow: hidden;
+}
+
+
+.player_profile_picture {
+	max-width: 50%;
+	max-height: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+
 }
