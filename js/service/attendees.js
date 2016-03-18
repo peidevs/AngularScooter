@@ -35,7 +35,7 @@ scooter.factory('attendees', function ($http) {
         try {
             var storedAttendees = JSON.parse(storedPlayers);
             storedAttendees.forEach(function (attendee) {
-                self.attendees.push(new Player(attendee.name));
+                self.attendees.push(new Player(attendee.name, attendee.thumb_link));
             });
         }catch(error){
             console.log("clearing local storage so issue doesn't continue");
