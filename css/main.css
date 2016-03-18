@@ -26,6 +26,12 @@ body {
 }
 
 .main .gameBoard {
+    display: flex;
+    display: -webkit-flex;
+
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+
     order: 2;
 
     flex-shrink: 1;
@@ -35,15 +41,7 @@ body {
     -webkit-flex-grow: 1;
 }
 
-.main .gamePieces {
-    display: flex;
-    display: -webkit-flex;
-
-    flex-wrap: wrap;
-    -webkit-flex-wrap: wrap;
-}
-
-.main .gamePieces div {
+.main div.gamePiece {
     display: flex;
     display: -webkit-flex;
 
@@ -54,7 +52,7 @@ body {
     -webkit-justify-content: center;
 }
 
-.main .gamePieces div span {
+.main div.gamePiece span {
     text-align: center;
 }
 
@@ -69,6 +67,25 @@ button {
     -webkit-border-radius: 5px;
     border: 2px solid black;
     padding: 2px;
+}
+
+.main div.gamePiece {
+	overflow: hidden;
+}
+
+
+.player_profile_picture {
+	max-width: 50%;
+	max-height: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+
+.loser {
+    visibility: hidden;
 }
 
 @media all and (max-width: 640px) {
@@ -88,8 +105,4 @@ button {
         align-self: flex-start;
     }
 
-}
-
-.loser {
-    visibility: hidden;
 }

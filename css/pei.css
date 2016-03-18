@@ -2,7 +2,7 @@ body.pei{
     background:#F7C636;
 }
 
-.pei .gameBoard div {
+.pei .gameBoard div.gamePiece {
     font:24px sans;
     font-weight: bold;
 

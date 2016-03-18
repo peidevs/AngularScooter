@@ -6,7 +6,7 @@ body.scooter{
     background:#F08C2B;
 }
 
-.scooter .gameBoard div {
+.scooter .gameBoard div.gamePiece {
     width: 150px;
     height: 150px;
     background: white;
@@ -16,7 +16,7 @@ body.scooter{
     cursor: pointer;
 }
 
-.scooter .gameBoard div span {
+.scooter .gameBoard div.gamePiece span {
     font: 24px sans;
     font-weight: bold;
     color: #130C09;

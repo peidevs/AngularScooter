@@ -26,5 +26,13 @@ Click the play button. Continue clicking until there is only 1 player left.
 Click reset and all the players will be added back to the game and shuffled on the board
 
 #Scooter Config
-In the game, the config menu will allow you to manage players and choose a new theme. You can manually add players, make them lose or give them a second chance.
-Note - If you refresh the browser you will lose any players added in the config menu.
+In the game, the config menu will allow you to 
+* Choose a one of three themes
+* Manually add players
+* Make a player lose or give them a second chance
+* Remove a player from the entire game
+* Load Players from the Meetup site
+* Show or Hide the pictures of players
+
+The player list is saved between sessions, so you can save your player list for later. The state of the player, win/lose is not retained between games.
+
