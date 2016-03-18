@@ -19,9 +19,10 @@
     <div class="col-xs-10 chunk">
         <ul class="playerList">
             <li ng-repeat="attendee in attendees" ng-class="{'loser': !attendee.isAlive, 'winner': attendee.isWinner}">
-                {{attendee.name}}
-                <img class="player_profile_picture" ng-src="{{attendee.photo_link}}">
-
+                {{attendee.name}} 
+                <div ng-if="showProfilePictures">
+                    <img class="player_profile_picture" ng-src="{{attendee.thumb_link || 'http://img2.meetupstatic.com/img/458386242735519287330/noPhoto_50.png'}}"/>
+                </div>
             </li>
         </ul>
     </div>

@@ -3,13 +3,19 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
     $scope.themes = config.themes;
     $scope.selectedTheme = angular.copy(config.theme);
 
+    $scope.showProfilePictures = config.showProfilePictures;
+
     $scope.players = angular.copy(attendees.get());
     $scope.selectedAlivePlayers = [];
     $scope.selectedDeadPlayers = [];
 
+
     $scope.playerToAdd = "";
 
     $scope.isMeetupError = false;
+
+
+
 
     $scope.cancel = function () {
         $modalInstance.dismiss();
@@ -40,13 +46,15 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
 
     $scope.save = function () {
         config.theme = $scope.selectedTheme;
+        config.showProfilePictures = $scope.showProfilePictures;
 
         if (validatePlayerList()) {
             updateWinnerStatus();
 
             $modalInstance.close({
                 theme: $scope.selectedTheme,
-                attendees: $scope.players
+                attendees: $scope.players,
+                showProfilePictures: $scope.showProfilePictures
             });
         } else {
             console.log( "Need 1 active player");
@@ -105,11 +113,11 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
                 results.attendees = meetupService.filterElders( results.attendees, results.elders );
 
                 $scope.players = results.attendees.map( function( rsvp ){
-                    var photo_link = "http://img2.meetupstatic.com/img/458386242735519287330/noPhoto_50.png";
+                    var thumb_link;
                     if (rsvp.member_photo) {
-                        photo_link = rsvp.member_photo.thumb_link;
+                        thumb_link = rsvp.member_photo.thumb_link;
                     }
-                    return new Player( rsvp.member.name, photo_link);
+                    return new Player( rsvp.member.name, thumb_link);
                 });
 
                 $scope.meetupStatus = "Loaded Event - " + event.name + " " + results.attendees.length + " attending. (" + rawNumberOfGuests + " Raw)";
@@ -125,6 +133,10 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
             $scope.isMeetupError = true;
             $scope.isLoading = false;
         });
+    }
+
+    $scope.toggleProfilePictures = function() {
+        $scope.showProfilePictures = !$scope.showProfilePictures;
     }
 
 });

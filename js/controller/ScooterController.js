@@ -8,6 +8,8 @@ scooter.controller('ScooterController', function ($scope, $modal, attendees, con
     $scope.playGame = attendees.play;
     $scope.resetGame = attendees.reset;
 
+    $scope.showProfilePictures = config.showProfilePictures;
+
     $scope.config = function(){
         var modalHandle = $modal.open({
             templateUrl : 'views/config.html',
@@ -19,7 +21,10 @@ scooter.controller('ScooterController', function ($scope, $modal, attendees, con
 
             attendees.update( results.attendees );
             $scope.attendees = results.attendees;
+            $scope.showProfilePictures = results.showProfilePictures;
+
             localStorage.setItem("attendees", JSON.stringify( results.attendees ));
         });
     }
+
 });

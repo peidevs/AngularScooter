@@ -8,5 +8,7 @@ scooter.factory( 'config', function(){
         { name: 'Sticky Note', path: 'postit' }
     ];
 
+    this.showProfilePictures = true;
+
     return this;
 });
