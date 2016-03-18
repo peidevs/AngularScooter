@@ -60,7 +60,7 @@ scooter.factory( 'meetupService', function( $http ){
                     'member' : {
                         'member_id' : -1,
                         'name' : (attendee.member.name + ' +' + i)
-                    },
+                    }
                 });
             }
         });
