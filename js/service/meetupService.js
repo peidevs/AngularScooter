@@ -53,6 +53,7 @@ scooter.factory( 'meetupService', function( $http ){
     this.retrieveGuests = function( attendees ){
         var guests = [];
 
+
         attendees.forEach( function( attendee ){
             for(var i=1; i<= attendee.guests; i++ ){
                 guests.push( {
