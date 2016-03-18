@@ -135,8 +135,5 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
         });
     }
 
-    $scope.toggleProfilePictures = function() {
-        $scope.showProfilePictures = !$scope.showProfilePictures;
-    }
 
 });

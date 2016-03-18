@@ -56,18 +56,11 @@ scooter.factory( 'meetupService', function( $http ){
 
         attendees.forEach( function( attendee ){
             for(var i=1; i<= attendee.guests; i++ ){
-                var thumb_link;
-                if (attendee.member_photo) {
-                    thumb_link = attendee.member_photo.thumb_link;
-                };
                 guests.push( {
                     'member' : {
                         'member_id' : -1,
                         'name' : (attendee.member.name + ' +' + i)
                     },
-                    'member_photo' : {
-                        'thumb_link' : thumb_link
-                    }
                 });
             }
         });
