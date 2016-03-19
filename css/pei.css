@@ -15,3 +15,8 @@ body.pei{
 
     cursor: pointer;
 }
+
+.pei div.gamePiece {
+    padding-left: 5px;
+    padding-right: 5px;
+}
