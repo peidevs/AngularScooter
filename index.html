@@ -16,7 +16,9 @@
     </section>
 
     <section class="gameBoard">
-            <div ng-repeat="attendee in attendees" class="gamePiece" ng-class="{'loser': !attendee.isAlive, 'winner': attendee.isWinner}">
+            <div ng-repeat="attendee in attendees"
+                 class="gamePiece {{(attendee.thumb_link && showProfilePictures) ? 'hasImage' : 'noImage'}}"
+                 ng-class="{'loser': !attendee.isAlive, 'winner': attendee.isWinner}">
                 <span>{{attendee.name}}</span>
                 <div ng-if="showProfilePictures">
                     <img class="player_profile_picture" ng-src="{{attendee.thumb_link || 'http://img2.meetupstatic.com/img/458386242735519287330/noPhoto_50.png'}}"/>

@@ -22,6 +22,19 @@ body.scooter{
     color: #130C09;
 }
 
+.scooter div.gamePiece.hasImage span,
+.scooter div.gamePiece.noImage .player_profile_picture
+{
+    display: none;
+}
+
+.scooter div.gamePiece.hasImage div,
+.scooter div.gamePiece.hasImage .player_profile_picture
+{
+    width : 100%;
+    height: 100%;
+}
+
 .scooter .winner {
     animation: spin 2s linear infinite;
 }
