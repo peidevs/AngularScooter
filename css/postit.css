@@ -19,6 +19,9 @@ body.postit {
     box-shadow: 3px 3px 5px rgba(30, 30, 30, .7);
     -moz-box-shadow: 3px 3px 5px rgba(30, 30, 30, .7);
     -webkit-box-shadow: 3px 3px 5px rgba(30, 30, 30, .7);
+
+    flex-direction: column-reverse;
+    -webkit-flex-direction: column-reverse;
 }
 
 .postit .gameBoard div.gamePiece:nth-child(even){
