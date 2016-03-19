@@ -24,6 +24,8 @@ scooter.controller('ScooterController', function ($scope, $modal, attendees, con
             $scope.showProfilePictures = results.showProfilePictures;
 
             localStorage.setItem("attendees", JSON.stringify( results.attendees ));
+            localStorage.setItem("theme", results.theme);
+            localStorage.setItem("showProfilePictures", results.showProfilePictures);
         });
     }
 
