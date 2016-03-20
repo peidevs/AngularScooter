@@ -42,9 +42,6 @@ body {
 
     -webkit-flex-shrink: 1;
     -webkit-flex-grow: 1;
-
-    justify-content: space-around;
-    -webkit-justify-content: space-around;
 }
 
 .main div.gamePiece {
