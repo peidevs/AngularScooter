@@ -2,21 +2,22 @@ body.pei{
     background:#F7C636;
 }
 
-.pei .gameBoard div.gamePiece {
+.pei div.gamePiece {
     font:24px sans;
     font-weight: bold;
 
-    width: 150px;
-    height: 100px;
+    height: 90px;
 
     border:2px solid #4D2F1D;
     background:white;
     color:#B7271C;
 
     cursor: pointer;
-}
 
-.pei div.gamePiece {
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.pei div.gamePiece img{
+    padding-left: 5px;
 }

@@ -1,10 +1,34 @@
 /**
 * Post It Note CSS comes from
 * http://code.tutsplus.com/tutorials/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934
+*
+* Bulletin board pattern comes from
+* https://github.com/LeaVerou/css3patterns
 */
 
 body.postit {
-    background-color: darkgray;
+    background-color: #EBEDBE;
+}
+
+.postit .gameBoard  {
+    padding: 15px;
+    margin-right: 15px;
+    background:
+        radial-gradient(black 15%, transparent 16%) 0 0,
+        radial-gradient(black 15%, transparent 16%) 8px 8px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+    background-color:lightgrey;
+    background-size:8px 8px;
+
+    border: #7f512d solid 25px;
+    -webkit-border-image: url(../img/wood.jpg) 80 stretch;
+    -moz-border-image: url(../img/wood.jpg) 80 stretch;
+    border-image: url(../img/wood.jpg) 80 stretch;
+
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(105, 105, 105,1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(105, 105, 105,1);
+    box-shadow: 10px 10px 5px 0px rgb(105, 105, 105);
 }
 
 .postit .gameBoard div.gamePiece {
@@ -64,6 +88,17 @@ body.postit {
     background: #ffa195
 }
 
+.postit button.play {
+    background-color: #CCFFCC;
+}
+
+.postit button.reset {
+    background-color: #ffa195;
+}
+
+.postit button.config {
+    background-color: #CCCCFF;
+}
 
 
 .postit .winner {
