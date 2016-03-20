@@ -52,4 +52,19 @@ body.scooter{
     -o-transition: all 0.4s ease-out;
 }
 
+.scooter button.reset {
+    background: #E52A1D;
+    color: #ffffff;
+}
+
+.scooter button.play {
+    background: #A7C766;
+    color: #ffffff;
+}
+
+.scooter button.config {
+    background: #F8E168;
+    color: #000000;
+}
+
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
