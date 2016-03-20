@@ -13,6 +13,8 @@ body.postit {
 .postit .gameBoard  {
     padding: 15px;
     margin-right: 15px;
+    min-height: 300px;
+
     background:
         radial-gradient(black 15%, transparent 16%) 0 0,
         radial-gradient(black 15%, transparent 16%) 8px 8px,
