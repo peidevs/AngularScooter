@@ -1,83 +1,86 @@
 <div class="configuration">
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#general">General</a></li>
-        <li><a data-toggle="tab" href="#meetup">Meetup</a></li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane active" id="general">
-            <div class="row">
-                <span class="col-xs-12 form-group">
-                    <label for="theme-select">Theme</label>
-                    <select ng-options="item.path as item.name for item in themes" ng-model="selectedTheme" id="theme-select"></select>
-                </span>
-            </div>
+    <form>
+        <h2>General Configuration</h2>
+        <div>
+            <label for="theme-select">Theme</label>
+            <select ng-options="item.path as item.name for item in themes"
+                    ng-model="selectedTheme"
+                    id="theme-select"></select>
+        </div>
+        <div>
+            <label for="picture-toggle">Show Profile Pictures:</label>
+            <input type="checkbox"
+                   ng-model="showProfilePictures"
+                   id="picture-toggle"/>
+        </div>
 
-            <div class="row">
-                <span class="col-xs-12 form-group">
-                    <label for="picture-toggle">Show Profile Pictures:</label>
-                    <input type="checkbox" ng-model="showProfilePictures" id="picture-toggle" />
-                </span>
-            </div>
-
-            <label class="col-xs-7">Alive Players</label>
-            <label class="col-xs-5">Dead Players</label>
+        <h2>Player Maintenance</h2>
+        <div>
+            <label>Alive Players</label>
+            <label>Dead Players</label>
 
             <select ng-options="player.name for player in players | filter:{isAlive:true}"
-                    ng-model="selectedAlivePlayers" multiple size="8" class="col-xs-5"
+                    ng-model="selectedAlivePlayers"
+                    multiple size="8"
                     ng-dblclick="killPlayer()"></select>
 
-            <div class="button-group-vertical col-xs-2 text-center">
-                <button class="btn btn-warning btn-block" ng-click="killPlayer()" title="Remove player from current game">&gt;&gt;</button>
-                <button class="btn btn-info btn-block" ng-click="resurrectPlayer()" title="Move player back to playable">&lt;&lt;</button>
-                <button class="btn btn-danger btn-block" ng-click="removePlayer()" title="Remove an already dead player from the game permanently">X</button>
-            </div>
-
             <select ng-options="player.name for player in players | filter:{isAlive:false}"
-                    ng-model="selectedDeadPlayers" multiple size="8" class="col-xs-5"
+                    ng-model="selectedDeadPlayers"
+                    multiple size="8"
                     ng-dblclick="resurrectPlayer()"></select>
 
-            <div class="row">
-                <div class="form-inline col-xs-8 stupidButtonsGiveMeTopPadding">
-                    <div class="form-group">
-                        <label for="playerToAdd">Name</label>
-                        <input type="text" class="form-control" id="playerToAdd" placeholder="Jane Doe" ng-model="playerToAdd">
-                    </div>
-                    <button class="btn btn-default" ng-click="addPlayer()">Add Player</button>
-                </div>
-
-                <div class="btn-group col-xs-4 stupidButtonsGiveMeTopPadding">
-                    <button class="btn btn-primary pull-right" ng-click="save()">Save</button>
-                    <button class="btn btn-default pull-right" ng-click="cancel()">Cancel</button>
-                </div>
+            <div>
+                <button ng-click="killPlayer()"
+                        title="Remove player from current game">&gt;&gt;</button>
+                <button ng-click="resurrectPlayer()"
+                        title="Move player back to playable">&lt;&lt;</button>
+                <button ng-click="removePlayer()"
+                        title="Remove an already dead player from the game permanently">X</button>
             </div>
         </div>
-        <div id="meetup" class="tab-pane">
-            <form class="form-horizontal">
-            <div class="form-group">
-                    <label for="groupName" class="col-xs-3 control-label">Group Name</label>
-                    <div class="col-xs-9">
-                        <input type="text" class="form-control" id="groupName" placeholder="pei-developers" ng-model="groupName">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="apiKey" class="col-xs-3 control-label">API Key</label>
-                    <div class="col-xs-9">
-                        <input type="text" class="form-control" id="apiKey" placeholder="See api.meetup.com" ng-model="apiKey">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="meetupDate" class="col-xs-3 control-label">Meetup Date</label>
-                    <div class="col-xs-9">
-                        <input type="text" class="form-control" id="meetupDate" placeholder="yyyy-MM-dd" ng-model="meetupDate">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-3">
-                        <button type="submit" class="btn btn-primary" ng-click="retrievePlayers()" ng-disabled="isLoading">Retrieve Players</button>
-                    </div>
-                    <span class="col-xs-9 control-label text-success" ng-class="{'text-success': !isMeetupError, 'text-danger': isMeetupError }">{{meetupStatus}}</span>
-                </div>
-            </form>
+
+        <div>
+            <div>
+                <label for="playerToAdd">Name</label>
+                <input type="text"
+                       id="playerToAdd"
+                       placeholder="Jane Doe"
+                       ng-model="playerToAdd">
+            </div>
+            <button ng-click="addPlayer()">Add Player</button>
         </div>
-    </div>
+
+        <div>
+            <button ng-click="save()">Save</button>
+            <button ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+
+    <form>
+        <h2>Meetup Integration</h2>
+
+        <label for="groupName">Group Name</label>
+        <input type="text"
+               id="groupName"
+               placeholder="pei-developers"
+               ng-model="groupName">
+
+        <label for="apiKey">API Key</label>
+        <input type="text"
+               id="apiKey"
+               placeholder="See api.meetup.com"
+               ng-model="apiKey">
+
+        <label for="meetupDate">Meetup Date</label>
+        <input type="text"
+               id="meetupDate"
+               placeholder="yyyy-MM-dd"
+               ng-model="meetupDate">
+
+        <button type="submit"
+                class="btn btn-primary"
+                ng-click="retrievePlayers()"
+                ng-disabled="isLoading">Retrieve Players</button>
+        <span class="{{isMeetupError ? 'danger' : 'success'}}">{{meetupStatus}}</span>
+    </form>
 </div>

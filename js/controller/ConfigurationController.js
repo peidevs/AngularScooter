@@ -3,7 +3,7 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
     $scope.themes = config.themes;
     $scope.selectedTheme = angular.copy(config.theme);
 
-    $scope.showProfilePictures = config.showProfilePictures;
+    $scope.showProfilePictures = angular.copy(config.showProfilePictures);
 
     $scope.players = angular.copy(attendees.get());
     $scope.selectedAlivePlayers = [];
@@ -17,7 +17,7 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
 
     $scope.cancel = function () {
         $location.path("/");
-        //TODO Navigate to '/'
+        //TODO Make sure model isn't changed on cancel
     };
 
     var validatePlayerList = function () {
@@ -44,20 +44,15 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
     };
 
     $scope.save = function () {
-        //TODO really save before navigating
-        $location.path("/");
-        config.theme = $scope.selectedTheme;
-        config.showProfilePictures = $scope.showProfilePictures;
 
         if (validatePlayerList()) {
             updateWinnerStatus();
+            attendees.update($scope.players);
 
-            //Find another way to resolve this
-            /*$modalInstance.close({
-                theme: $scope.selectedTheme,
-                attendees: $scope.players,
-                showProfilePictures: $scope.showProfilePictures
-            });*/
+            config.theme = $scope.selectedTheme;
+            config.showProfilePictures = $scope.showProfilePictures;
+
+            $location.path("/");
         } else {
             console.log( "Need 1 active player");
         }
