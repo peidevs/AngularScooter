@@ -5,7 +5,7 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
 
     $scope.showProfilePictures = angular.copy(config.showProfilePictures);
 
-    $scope.players = angular.copy(attendees.get());
+    $scope.players = angular.copy(attendees.attendees);
     $scope.selectedAlivePlayers = [];
     $scope.selectedDeadPlayers = [];
 
@@ -26,6 +26,7 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
         });
     };
 
+    //TODO consider moving this and any "attendee" specific logic to attendee factory
     var updateWinnerStatus = function () {
 
         var numPlayersStillAlive = $scope.players.filter( function( player){
@@ -47,7 +48,7 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
 
         if (validatePlayerList()) {
             updateWinnerStatus();
-            attendees.update($scope.players);
+            attendees.attendees = $scope.players;
 
             config.theme = $scope.selectedTheme;
             config.showProfilePictures = $scope.showProfilePictures;
