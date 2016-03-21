@@ -1,5 +1,5 @@
 'use strict';
-scooter.controller('ScooterController', function ($scope, $modal, attendees, config) {
+scooter.controller('ScooterController', function ($scope, $location, attendees, config) {
 
     $scope.theme = config.theme;
 
@@ -11,7 +11,10 @@ scooter.controller('ScooterController', function ($scope, $modal, attendees, con
     $scope.showProfilePictures = config.showProfilePictures;
 
     $scope.config = function(){
-        var modalHandle = $modal.open({
+        $location.path('/config');
+
+        //TODO find another way to share variables
+        /*var modalHandle = $modal.open({
             templateUrl : 'views/config.html',
             controller: 'ConfigurationModal'
         });
@@ -26,7 +29,7 @@ scooter.controller('ScooterController', function ($scope, $modal, attendees, con
             localStorage.setItem("attendees", JSON.stringify( results.attendees ));
             localStorage.setItem("theme", results.theme);
             localStorage.setItem("showProfilePictures", results.showProfilePictures);
-        });
+        });*/
     }
 
 });

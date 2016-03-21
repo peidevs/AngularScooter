@@ -1,5 +1,5 @@
 'use strict';
-scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, config, attendees, meetupService) {
+scooter.controller('ConfigurationController', function ($scope, $location, $q, config, attendees, meetupService) {
     $scope.themes = config.themes;
     $scope.selectedTheme = angular.copy(config.theme);
 
@@ -15,10 +15,9 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
     $scope.isMeetupError = false;
 
 
-
-
     $scope.cancel = function () {
-        $modalInstance.dismiss();
+        $location.path("/");
+        //TODO Navigate to '/'
     };
 
     var validatePlayerList = function () {
@@ -45,17 +44,20 @@ scooter.controller('ConfigurationModal', function ($scope, $modalInstance, $q, c
     };
 
     $scope.save = function () {
+        //TODO really save before navigating
+        $location.path("/");
         config.theme = $scope.selectedTheme;
         config.showProfilePictures = $scope.showProfilePictures;
 
         if (validatePlayerList()) {
             updateWinnerStatus();
 
-            $modalInstance.close({
+            //Find another way to resolve this
+            /*$modalInstance.close({
                 theme: $scope.selectedTheme,
                 attendees: $scope.players,
                 showProfilePictures: $scope.showProfilePictures
-            });
+            });*/
         } else {
             console.log( "Need 1 active player");
         }
