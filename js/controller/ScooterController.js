@@ -3,7 +3,7 @@ scooter.controller('ScooterController', function ($scope, $location, attendees, 
 
     $scope.theme = config.theme;
 
-    $scope.attendees = attendees.attendees;
+    $scope.attendees = attendees.get();
 
     $scope.playGame = attendees.play;
     $scope.resetGame = attendees.reset;

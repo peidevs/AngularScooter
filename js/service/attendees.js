@@ -48,7 +48,13 @@ scooter.factory('attendees', function ($http) {
     randomizeAttendees();
 
     return {
-        attendees : attendees,
+        get : function(){
+          return attendees;
+        },
+
+        update : function( attendees ){
+            attendees = attendees;
+        },
 
         play: function () {
             attendees.forEach(function (attendee) {

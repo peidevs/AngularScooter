@@ -5,7 +5,7 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
 
     $scope.showProfilePictures = angular.copy(config.showProfilePictures);
 
-    $scope.players = angular.copy(attendees.attendees);
+    $scope.players = angular.copy(attendees.get());
     $scope.selectedAlivePlayers = [];
     $scope.selectedDeadPlayers = [];
 
@@ -48,7 +48,7 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
 
         if (validatePlayerList()) {
             updateWinnerStatus();
-            attendees.attendees = $scope.players;
+            attendees.update($scope.players);
 
             config.theme = $scope.selectedTheme;
             config.showProfilePictures = $scope.showProfilePictures;
@@ -104,8 +104,6 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
 
                 results.attendees = results.attendees.concat( guests );
 
-
-
                 var rawNumberOfGuests = results.attendees.length;
 
                 results.attendees = meetupService.filterElders( results.attendees, results.elders );
@@ -132,6 +130,4 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
             $scope.isLoading = false;
         });
     }
-
-
 });
