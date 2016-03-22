@@ -52,8 +52,8 @@ scooter.factory('attendees', function ($http) {
           return attendees;
         },
 
-        update : function( attendees ){
-            attendees = attendees;
+        update : function( value ){
+            attendees = value;
         },
 
         play: function () {
