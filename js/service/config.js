@@ -1,5 +1,8 @@
 'use strict';
-scooter.factory( 'config', function(){
+scooter.factory( 'config', function($rootScope){
+
+    //TODO local Storage is broken for config. no longer saving. Consider changing notify to saveChanges() and put the emit
+    // as part of the save
 
     var theme = localStorage.getItem("theme") ? localStorage.getItem("theme") : 'scooter';
     var showProfilePictures = localStorage.getItem("showProfilePictures") ? (localStorage.getItem("showProfilePictures") === "true") : false;
@@ -13,6 +16,15 @@ scooter.factory( 'config', function(){
     ];
 
     this.showProfilePictures = showProfilePictures;
+
+    this.subscribe = function(scope, callback) {
+        var handler = $rootScope.$on('scooter-configuration-updated', callback);
+        scope.$on('$destroy', handler);
+    };
+
+    this.notify = function() {
+        $rootScope.$emit('scooter-configuration-updated');
+    }
 
     return this;
 });

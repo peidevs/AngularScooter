@@ -17,7 +17,6 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
 
     $scope.cancel = function () {
         $location.path("/");
-        //TODO Make sure model isn't changed on cancel
     };
 
     var validatePlayerList = function () {
@@ -53,7 +52,9 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
             config.theme = $scope.selectedTheme;
             config.showProfilePictures = $scope.showProfilePictures;
 
+            config.notify();
             $location.path("/");
+
         } else {
             console.log( "Need 1 active player");
         }
@@ -129,5 +130,5 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
             $scope.isMeetupError = true;
             $scope.isLoading = false;
         });
-    }
+    };
 });

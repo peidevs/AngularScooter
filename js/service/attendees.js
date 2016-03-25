@@ -52,6 +52,7 @@ scooter.factory('attendees', function ($http) {
           return attendees;
         },
 
+        //TODO loclStorage code is gone. Consider adding the localstorage save as part of update()
         update : function( value ){
             attendees = value;
         },

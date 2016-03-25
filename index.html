@@ -10,6 +10,7 @@
     <script type="text/javascript" src="lib/angular/angular-route.min.js"></script>
 
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controller/MainController.js"></script>
     <script type="text/javascript" src="js/controller/ScooterController.js"></script>
     <script type="text/javascript" src="js/controller/ConfigurationController.js"></script>
     <script type="text/javascript" src="js/model/Player.js"></script>
@@ -22,7 +23,7 @@
   TODO What am I going to do about hte theme??
   I moved the theme class tag to the view, but the body isn't fully filled with the background color
  -->
-<body>
+<body ng-controller="MainController" class="{{theme}}">
 
     <div ng-view></div>
 
