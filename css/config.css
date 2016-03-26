@@ -1,0 +1,40 @@
+.configuration .playerMaintenance select {
+    width: 10em;
+}
+
+.configuration .playerMaintenance button {
+    width: 3em;
+    display: block;
+    margin: 5px;
+}
+
+.configuration .playerMaintenance > div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.configuration .addPlayer {
+    padding-top: 10px;
+}
+
+
+.configuration .tabs .controls div {
+    display: inline-block;
+    width: 9em;
+    line-height: 1.3em;
+
+    background-color: blanchedalmond;
+    border: solid 1px black;
+}
+
+.configuration .tabs .controls a {
+    text-decoration: none;
+}
+
+.configuration .tabs div.content > div {
+    display: none;
+}
+
+.configuration .tabs div.content > div.active {
+    display: block;
+}

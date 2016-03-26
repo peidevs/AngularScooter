@@ -1,59 +1,59 @@
 <div class="configuration">
+    <div>
+        <button ng-click="save()">Save</button>
+        <button ng-click="cancel()">Cancel</button>
+    </div>
+
     <form>
-        <h2>General Configuration</h2>
-        <div>
-            <label for="theme-select">Theme</label>
-            <select ng-options="item.path as item.name for item in themes"
-                    ng-model="selectedTheme"
-                    id="theme-select"></select>
-        </div>
-        <div>
-            <label for="picture-toggle">Show Profile Pictures:</label>
-            <input type="checkbox"
-                   ng-model="showProfilePictures"
-                   id="picture-toggle"/>
-        </div>
-
-        <h2>Player Maintenance</h2>
-        <div>
-            <label>Alive Players</label>
-            <label>Dead Players</label>
-
-            <select ng-options="player.name for player in players | filter:{isAlive:true}"
-                    ng-model="selectedAlivePlayers"
-                    multiple size="8"
-                    ng-dblclick="killPlayer()"></select>
-
-            <select ng-options="player.name for player in players | filter:{isAlive:false}"
-                    ng-model="selectedDeadPlayers"
-                    multiple size="8"
-                    ng-dblclick="resurrectPlayer()"></select>
-
+        <fieldset>
+            <legend>General Configuration</legend>
             <div>
-                <button ng-click="killPlayer()"
-                        title="Remove player from current game">&gt;&gt;</button>
-                <button ng-click="resurrectPlayer()"
-                        title="Move player back to playable">&lt;&lt;</button>
-                <button ng-click="removePlayer()"
-                        title="Remove an already dead player from the game permanently">X</button>
+                <label for="theme-select">Theme</label>
+                <select ng-options="item.path as item.name for item in themes"
+                        ng-model="selectedTheme"
+                        id="theme-select"></select>
             </div>
-        </div>
-
-        <div>
             <div>
+                <label for="picture-toggle">Show Profile Pictures:</label>
+                <input type="checkbox"
+                       ng-model="showProfilePictures"
+                       id="picture-toggle"/>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Player Maintenance</legend>
+
+            <div class="playerMaintenance">
+                <select ng-options="player.name for player in players | filter:{isAlive:true}"
+                        ng-model="selectedAlivePlayers"
+                        multiple size="8"
+                        ng-dblclick="killPlayer()"></select>
+
+                <div>
+                    <button ng-click="killPlayer()"
+                            title="Remove player from current game">&gt;&gt;</button>
+                    <button ng-click="resurrectPlayer()"
+                            title="Move player back to playable">&lt;&lt;</button>
+                    <button ng-click="removePlayer()"
+                            title="Remove an already dead player from the game permanently">X</button>
+                </div>
+
+                <select ng-options="player.name for player in players | filter:{isAlive:false}"
+                        ng-model="selectedDeadPlayers"
+                        multiple size="8"
+                        ng-dblclick="resurrectPlayer()"></select>
+            </div>
+
+            <div class="addPlayer">
                 <label for="playerToAdd">Name</label>
                 <input type="text"
                        id="playerToAdd"
                        placeholder="Jane Doe"
                        ng-model="playerToAdd">
+                <button ng-click="addPlayer()" class="play">Add Player</button>
             </div>
-            <button ng-click="addPlayer()">Add Player</button>
-        </div>
-
-        <div>
-            <button ng-click="save()">Save</button>
-            <button ng-click="cancel()">Cancel</button>
-        </div>
+        </fieldset>
     </form>
 
     <form>
