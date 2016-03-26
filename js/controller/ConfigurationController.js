@@ -51,8 +51,8 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
 
             config.theme = $scope.selectedTheme;
             config.showProfilePictures = $scope.showProfilePictures;
+            config.save();
 
-            config.notify();
             $location.path("/");
 
         } else {

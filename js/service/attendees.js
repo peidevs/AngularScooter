@@ -52,9 +52,11 @@ scooter.factory('attendees', function ($http) {
           return attendees;
         },
 
-        //TODO loclStorage code is gone. Consider adding the localstorage save as part of update()
         update : function( value ){
             attendees = value;
+
+            //TODO Save Image URL of player as well if available? Doublecheck to see if this does that
+            localStorage.setItem( "attendees", JSON.stringify (value));
         },
 
         play: function () {

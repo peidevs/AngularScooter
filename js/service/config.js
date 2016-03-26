@@ -22,7 +22,10 @@ scooter.factory( 'config', function($rootScope){
         scope.$on('$destroy', handler);
     };
 
-    this.notify = function() {
+    this.save = function() {
+        localStorage.setItem("theme", this.theme);
+        localStorage.setItem("showProfilePicture", this.showProfilePictures);
+
         $rootScope.$emit('scooter-configuration-updated');
     }
 
