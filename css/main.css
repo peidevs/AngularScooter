@@ -3,14 +3,15 @@ body {
     padding: 0;
 }
 
-.main {
+.main,
+.configuration{
     display: flex;
     display: -webkit-flex;
 
     padding-top: 10px;
 }
 
-.main section.menu {
+section.menu {
     order: 1;
 
     flex-shrink: 0;
@@ -26,7 +27,7 @@ body {
     text-align: center;
 }
 
-.main .gameBoard {
+section.gameBoard {
     display: flex;
     display: -webkit-flex;
 

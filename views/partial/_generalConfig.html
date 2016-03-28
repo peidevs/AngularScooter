@@ -1,0 +1,14 @@
+<form>
+    <div>
+        <label for="theme-select">Theme</label>
+        <select ng-options="item.path as item.name for item in themes"
+                ng-model="selectedTheme"
+                id="theme-select"></select>
+    </div>
+    <div>
+        <label for="picture-toggle">Show Profile Pictures:</label>
+        <input type="checkbox"
+               ng-model="showProfilePictures"
+               id="picture-toggle"/>
+    </div>
+</form>

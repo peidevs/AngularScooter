@@ -1,8 +1,8 @@
 scooter.controller("TabController", function () {
     this.tabs = [
-        {'name': 'General', 'template': 'generalTemplate.tmpl'},
-        {'name': 'Edit Players', 'template': 'playerMaintenance.tmpl'},
-        {'name': 'Meetup Integration', 'template': 'meetupIntegration.tmpl'}
+        {'name': 'General', 'template': 'views/partial/_generalConfig.html'},
+        {'name': 'Edit Players', 'template': 'views/partial/_playerMaintenance.html'},
+        {'name': 'Meetup Integration', 'template': 'views/partial/_meetupIntegration.html'}
     ];
 
     this.tabContent = this.tabs[0].template;

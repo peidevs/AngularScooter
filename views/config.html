@@ -1,115 +1,20 @@
 <div class="configuration">
-    <div>
-        <button ng-click="save()">Save</button>
-        <button ng-click="cancel()">Cancel</button>
-    </div>
+    <section class="menu">
+        <button ng-click="save()" class="play">Save</button>
+        <button ng-click="cancel()" class="reset">Cancel</button>
+    </section>
 
-    <form>
-        <fieldset>
-            <legend>General Configuration</legend>
+    <section class="gameBoard">
+
+        <div ng-controller="TabController as tabCtrl">
+            <ul>
+                <li ng-repeat="tab in tabCtrl.tabs">
+                    <a href="#" ng-click="tabCtrl.navigate( tab.template )" onclick="return false;">{{ tab.name }}</a>
+                </li>
+            </ul>
             <div>
-                <label for="theme-select">Theme</label>
-                <select ng-options="item.path as item.name for item in themes"
-                        ng-model="selectedTheme"
-                        id="theme-select"></select>
+                <div ng-include="tabCtrl.tabContent"></div>
             </div>
-            <div>
-                <label for="picture-toggle">Show Profile Pictures:</label>
-                <input type="checkbox"
-                       ng-model="showProfilePictures"
-                       id="picture-toggle"/>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>Player Maintenance</legend>
-
-            <div class="playerMaintenance">
-                <select ng-options="player.name for player in players | filter:{isAlive:true}"
-                        ng-model="selectedAlivePlayers"
-                        multiple size="8"
-                        ng-dblclick="killPlayer()"></select>
-
-                <div>
-                    <button ng-click="killPlayer()"
-                            title="Remove player from current game">&gt;&gt;</button>
-                    <button ng-click="resurrectPlayer()"
-                            title="Move player back to playable">&lt;&lt;</button>
-                    <button ng-click="removePlayer()"
-                            title="Remove an already dead player from the game permanently">X</button>
-                </div>
-
-                <select ng-options="player.name for player in players | filter:{isAlive:false}"
-                        ng-model="selectedDeadPlayers"
-                        multiple size="8"
-                        ng-dblclick="resurrectPlayer()"></select>
-            </div>
-
-            <div class="addPlayer">
-                <label for="playerToAdd">Name</label>
-                <input type="text"
-                       id="playerToAdd"
-                       placeholder="Jane Doe"
-                       ng-model="playerToAdd">
-                <button ng-click="addPlayer()" class="play">Add Player</button>
-            </div>
-        </fieldset>
-    </form>
-
-    <form>
-        <h2>Meetup Integration</h2>
-
-        <label for="groupName">Group Name</label>
-        <input type="text"
-               id="groupName"
-               placeholder="pei-developers"
-               ng-model="groupName">
-
-        <label for="apiKey">API Key</label>
-        <input type="text"
-               id="apiKey"
-               placeholder="See api.meetup.com"
-               ng-model="apiKey">
-
-        <label for="meetupDate">Meetup Date</label>
-        <input type="text"
-               id="meetupDate"
-               placeholder="yyyy-MM-dd"
-               ng-model="meetupDate">
-
-        <button type="submit"
-                class="btn btn-primary"
-                ng-click="retrievePlayers()"
-                ng-disabled="isLoading">Retrieve Players</button>
-        <span class="{{isMeetupError ? 'danger' : 'success'}}">{{meetupStatus}}</span>
-    </form>
-
-
-
-<!-- Sample tabs...hoping this works-->
-    <!-- Navigation not working -->
-    <!-- Styles -->
-    <!-- Templates -->
-    <div ng-controller="TabController as tabCtrl">
-        <ul>
-            <li ng-repeat="tab in tabCtrl.tabs">
-                <a href="#" ng-click="tabCtrl.navigate( tab.template )" onclick="return false;">{{ tab.name }}</a>
-            </li>
-        </ul>
-        <div>
-            <div ng-include="tabCtrl.tabContent"></div>
         </div>
-    </div>
-
-    <script type="text/ng-template" id="generalTemplate.tmpl">
-        Hello Tabs
-    </script>
-
-    <script type="text/ng-template" id="playerMaintenance.tmpl">
-        Hello Second Tab
-    </script>
-
-    <script type="text/ng-template" id="meetupIntegration.tmpl">
-        jhkhkjhj
-    </script>
+    </section>
 </div>
