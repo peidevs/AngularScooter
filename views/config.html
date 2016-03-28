@@ -83,4 +83,33 @@
                 ng-disabled="isLoading">Retrieve Players</button>
         <span class="{{isMeetupError ? 'danger' : 'success'}}">{{meetupStatus}}</span>
     </form>
+
+
+
+<!-- Sample tabs...hoping this works-->
+    <!-- Navigation not working -->
+    <!-- Styles -->
+    <!-- Templates -->
+    <div ng-controller="TabController as tabCtrl">
+        <ul>
+            <li ng-repeat="tab in tabCtrl.tabs">
+                <a href="#" ng-click="tabCtrl.navigate( tab.template )" onclick="return false;">{{ tab.name }}</a>
+            </li>
+        </ul>
+        <div>
+            <div ng-include="tabCtrl.tabContent"></div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="generalTemplate.tmpl">
+        Hello Tabs
+    </script>
+
+    <script type="text/ng-template" id="playerMaintenance.tmpl">
+        Hello Second Tab
+    </script>
+
+    <script type="text/ng-template" id="meetupIntegration.tmpl">
+        jhkhkjhj
+    </script>
 </div>
