@@ -1,3 +1,14 @@
+'use strict';
+
+/**
+ * Wouldn't this be better as a directive?
+ * <tabContainer>
+ *  <tab name='First Tab' template='views/partial/_sometemplate' active />
+ *  <tab name='Second Tab' template='views/partial_someOtherTemplate />
+ * </tabContainer>
+ *
+ * is markup like this possible?
+ */
 scooter.controller("TabController", function () {
     this.tabs = [
         {'name': 'General', 'template': 'views/partial/_generalConfig.html'},
