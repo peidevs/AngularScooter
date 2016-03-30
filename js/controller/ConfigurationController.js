@@ -1,23 +1,20 @@
 'use strict';
 scooter.controller('ConfigurationController', function ($scope, $location, $q, config, attendees, meetupService) {
+
     $scope.themes = config.themes;
     $scope.selectedTheme = angular.copy(config.theme);
-
     $scope.showProfilePictures = angular.copy(config.showProfilePictures);
 
     $scope.players = angular.copy(attendees.get());
     $scope.selectedAlivePlayers = [];
     $scope.selectedDeadPlayers = [];
-
-
     $scope.playerToAdd = "";
 
+    $scope.apiKey = '';
+    $scope.groupName = '';
+    $scope.meetupDate = '';
     $scope.isMeetupError = false;
 
-
-    $scope.cancel = function () {
-        $location.path("/");
-    };
 
     var validatePlayerList = function () {
         return $scope.players.some(function( player ){
@@ -41,6 +38,10 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
                 attendee.isWinner = false;
             });
         }
+    };
+
+    $scope.cancel = function () {
+        $location.path("/");
     };
 
     $scope.save = function () {
