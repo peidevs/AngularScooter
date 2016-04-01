@@ -1,6 +1,6 @@
 'use strict';
 /**
- *  Code copied and modified from Angular tutorial
+ *  Code copied and modified from Angular tutorial (MIT Licence)
  *  https://docs.angularjs.org/guide/directive
  */
 scooter.directive( "tabContainer", function(){
