@@ -5,16 +5,10 @@
     </section>
 
     <section class="gameBoard">
-
-        <div ng-controller="TabController as tabCtrl">
-            <ul>
-                <li ng-repeat="tab in tabCtrl.tabs">
-                    <a href="#" ng-click="tabCtrl.navigate( tab.template )" onclick="return false;">{{ tab.name }}</a>
-                </li>
-            </ul>
-            <div>
-                <div ng-include="tabCtrl.tabContent"></div>
-            </div>
-        </div>
+        <tab-container>
+            <tab name="General" template="views/partial/_generalConfig.html"></tab>
+            <tab name="Edit Players" template="views/partial/_playerMaintenance.html"></tab>
+            <tab name="Meetup Integration" template="views/partial/_meetupIntegration.html"></tab>
+        </tab-container>
     </section>
 </div>
