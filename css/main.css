@@ -95,6 +95,10 @@ button {
 }
 
 /* Tab sections*/
+/* Themes should override the following
+    .tabContainer li.active {} with background color of the active tab
+    .tabContainer .tabContent to remove border or change background color of config
+*/
 .tabContainer ul {
     list-style: none;
     margin: 0px;
