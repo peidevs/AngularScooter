@@ -5,11 +5,13 @@ scooter.config(['$routeProvider', function($routeProvider) {
         $routeProvider.
             when('/', {
                 templateUrl: 'views/gameBoard.html',
-                controller: 'ScooterController'
+                controller: 'ScooterController',
+                controllerAs : 'scooterCtrl'
             }).
             when('/config', {
                 templateUrl: 'views/config.html',
-                controller: 'ConfigurationController'
+                controller: 'ConfigurationController',
+                controllerAs : 'configCtrl'
             }).
             otherwise({
                 redirectTo: '/'

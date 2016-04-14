@@ -1,14 +1,14 @@
 <div class="configuration">
     <section class="menu">
-        <button ng-click="save()" class="play">Save</button>
-        <button ng-click="cancel()" class="reset">Cancel</button>
+        <button ng-click="configCtrl.save()" class="play">Save</button>
+        <button ng-click="configCtrl.cancel()" class="reset">Cancel</button>
     </section>
 
     <section class="gameBoard">
         <tab-container>
-            <tab name="General" template="views/partial/_generalConfig.html"></tab>
-            <tab name="Edit Players" template="views/partial/_playerMaintenance.html"></tab>
-            <tab name="Meetup Integration" template="views/partial/_meetupIntegration.html"></tab>
+            <tab name="General" template="views/partial/_generalConfig.html" ctrl="configCtrl"></tab>
+            <tab name="Edit Players" template="views/partial/_playerMaintenance.html" ctrl="configCtrl"></tab>
+            <tab name="Meetup Integration" template="views/partial/_meetupIntegration.html" ctrl="configCtrl"></tab>
         </tab-container>
     </section>
 </div>

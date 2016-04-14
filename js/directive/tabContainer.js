@@ -35,7 +35,8 @@ scooter.directive( "tab", function(){
         restrict: 'E',
         scope: {
             name : '@',
-            template : '@'
+            template : '@',
+            ctrl : '='
         },
         templateUrl: 'views/partial/_tab.html',
         link: function(scope, element, attrs, parentController) {

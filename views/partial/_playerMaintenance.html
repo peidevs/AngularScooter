@@ -1,23 +1,23 @@
 <form>
     <div class="playerMaintenance">
-        <select ng-options="player.name for player in players | filter:{isAlive:true}"
-                ng-model="selectedAlivePlayers"
+        <select ng-options="player.name for player in ctrl.players | filter:{isAlive:true}"
+                ng-model="ctrl.selectedAlivePlayers"
                 multiple size="8"
-                ng-dblclick="killPlayer()"></select>
+                ng-dblclick="ctrl.killPlayer()"></select>
 
         <div>
-            <button ng-click="killPlayer()"
+            <button ng-click="ctrl.killPlayer()"
                     title="Remove player from current game">&gt;&gt;</button>
-            <button ng-click="resurrectPlayer()"
+            <button ng-click="ctrl.resurrectPlayer()"
                     title="Move player back to playable">&lt;&lt;</button>
-            <button ng-click="removePlayer()"
+            <button ng-click="ctrl.removePlayer()"
                     title="Remove an already dead player from the game permanently">X</button>
         </div>
 
-        <select ng-options="player.name for player in players | filter:{isAlive:false}"
-                ng-model="selectedDeadPlayers"
+        <select ng-options="player.name for player in ctrl.players | filter:{isAlive:false}"
+                ng-model="ctrl.selectedDeadPlayers"
                 multiple size="8"
-                ng-dblclick="resurrectPlayer()"></select>
+                ng-dblclick="ctrl.resurrectPlayer()"></select>
     </div>
 
     <div class="addPlayer">
@@ -25,7 +25,7 @@
         <input type="text"
                id="playerToAdd"
                placeholder="Jane Doe"
-               ng-model="playerToAdd">
-        <button ng-click="addPlayer()" class="play">Add Player</button>
+               ng-model="ctrl.playerToAdd">
+        <button ng-click="ctrl.addPlayer()" class="play">Add Player</button>
     </div>
 </form>

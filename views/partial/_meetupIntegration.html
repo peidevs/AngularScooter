@@ -3,23 +3,23 @@
     <input type="text"
            id="groupName"
            placeholder="pei-developers"
-           ng-model="groupName">
+           ng-model="ctrl.groupName">
 
     <label for="apiKey">API Key</label>
     <input type="text"
            id="apiKey"
            placeholder="See api.meetup.com"
-           ng-model="apiKey">
+           ng-model="ctrl.apiKey">
 
     <label for="meetupDate">Meetup Date</label>
     <input type="text"
            id="meetupDate"
            placeholder="yyyy-MM-dd"
-           ng-model="meetupDate">
+           ng-model="ctrl.meetupDate">
 
     <button type="submit"
             class="btn btn-primary"
-            ng-click="retrievePlayers()"
+            ng-click="ctrl.retrievePlayers()"
             ng-disabled="isLoading">Retrieve Players</button>
     <span class="{{isMeetupError ? 'danger' : 'success'}}">{{meetupStatus}}</span>
 </div>

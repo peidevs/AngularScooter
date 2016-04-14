@@ -1,57 +1,57 @@
 'use strict';
-scooter.controller('ConfigurationController', function ($scope, $location, $q, config, attendees, meetupService) {
+scooter.controller('ConfigurationController', function ($location, $q, config, attendees, meetupService) {
 
-    $scope.themes = config.themes;
-    $scope.selectedTheme = angular.copy(config.theme);
-    $scope.showProfilePictures = angular.copy(config.showProfilePictures);
+    this.themes = config.themes;
+    this.selectedTheme = angular.copy(config.theme);
+    this.showProfilePictures = angular.copy(config.showProfilePictures);
 
-    $scope.players = angular.copy(attendees.get());
-    $scope.selectedAlivePlayers = [];
-    $scope.selectedDeadPlayers = [];
-    $scope.playerToAdd = "";
+    this.players = angular.copy(attendees.get());
+    this.selectedAlivePlayers = [];
+    this.selectedDeadPlayers = [];
+    this.playerToAdd = "";
 
-    $scope.apiKey = '';
-    $scope.groupName = '';
-    $scope.meetupDate = '';
-    $scope.isMeetupError = false;
+    this.apiKey = '';
+    this.groupName = '';
+    this.meetupDate = '';
+    this.isMeetupError = false;
 
 
-    var validatePlayerList = function () {
-        return $scope.players.some(function( player ){
+    this._validatePlayerList = function () {
+        return this.players.some(function( player ){
             return player.isAlive;
         });
     };
 
     //TODO consider moving this and any "attendee" specific logic to attendee factory
-    var updateWinnerStatus = function () {
+    this._updateWinnerStatus = function () {
 
-        var numPlayersStillAlive = $scope.players.filter( function( player){
+        var numPlayersStillAlive = this.players.filter( function( player){
             return player.isAlive;
         }).length;
 
         if( numPlayersStillAlive === 1){
-            $scope.players.forEach(function( player ){
+            this.players.forEach(function( player ){
                 player.isWinner = player.isAlive;
             });
         } else {
-            $scope.players.forEach(function (attendee) {
+            this.players.forEach(function (attendee) {
                 attendee.isWinner = false;
             });
         }
     };
 
-    $scope.cancel = function () {
+    this.cancel = function () {
         $location.path("/");
     };
 
-    $scope.save = function () {
+    this.save = function () {
 
-        if (validatePlayerList()) {
-            updateWinnerStatus();
-            attendees.update($scope.players);
+        if (this._validatePlayerList()) {
+            this._updateWinnerStatus();
+            attendees.update(this.players);
 
-            config.theme = $scope.selectedTheme;
-            config.showProfilePictures = $scope.showProfilePictures;
+            config.theme = this.selectedTheme;
+            config.showProfilePictures = this.showProfilePictures;
             config.save();
 
             $location.path("/");
@@ -61,41 +61,43 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
         }
     };
 
-    $scope.killPlayer = function () {
-        $scope.selectedAlivePlayers.forEach(function (player) {
+    this.killPlayer = function () {
+        this.selectedAlivePlayers.forEach(function (player) {
             player.isAlive = false;
         });
     };
 
-    $scope.resurrectPlayer = function () {
-        $scope.selectedDeadPlayers.forEach(function (player) {
+    this.resurrectPlayer = function () {
+        this.selectedDeadPlayers.forEach(function (player) {
             player.isAlive = true;
         })
     };
 
-    $scope.addPlayer = function () {
-        if ($scope.playerToAdd) {
-            $scope.players.push(new Player($scope.playerToAdd));
-            $scope.playerToAdd = "";
+    this.addPlayer = function () {
+        if (this.playerToAdd) {
+            this.players.push(new Player(this.playerToAdd));
+            this.playerToAdd = "";
         }
     };
 
-    $scope.removePlayer = function(){
-        $scope.players = $scope.players.filter( function(player){
-           return !$scope.selectedDeadPlayers.some( function(selectedDeadPlayer){
+    this.removePlayer = function(){
+
+
+        this.players = this.players.filter( function(player){
+           return !this.selectedDeadPlayers.some( function(selectedDeadPlayer){
                return selectedDeadPlayer.name === player.name && !player.isAlive;
            });
-        });
+        }, this);
     };
 
-    $scope.retrievePlayers = function() {
+    this.retrievePlayers = function() {
 
-        $scope.isLoading = true;
+        this.isLoading = true;
 
-        meetupService.retrieveEvent( $scope.apiKey, $scope.groupName, $scope.meetupDate).then( function eventSuccess(event)
+        meetupService.retrieveEvent( this.apiKey, this.groupName, this.meetupDate).then( function eventSuccess(event)
         {
-            var attendeePromise = meetupService.retrieveAttendees( $scope.apiKey, event.id );
-            var elderPromise = meetupService.retrieveElders( $scope.apiKey, $scope.groupName );
+            var attendeePromise = meetupService.retrieveAttendees( this.apiKey, event.id );
+            var elderPromise = meetupService.retrieveElders( this.apiKey, this.groupName );
 
             $q.all( {
                 attendees : attendeePromise,
@@ -110,7 +112,7 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
 
                 results.attendees = meetupService.filterElders( results.attendees, results.elders );
 
-                $scope.players = results.attendees.map( function( rsvp ){
+                this.players = results.attendees.map( function( rsvp ){
                     var thumb_link;
                     if (rsvp.member_photo) {
                         thumb_link = rsvp.member_photo.thumb_link;
@@ -118,18 +120,18 @@ scooter.controller('ConfigurationController', function ($scope, $location, $q, c
                     return new Player( rsvp.member.name, thumb_link);
                 });
 
-                $scope.meetupStatus = "Loaded Event - " + event.name + " " + results.attendees.length + " attending. (" + rawNumberOfGuests + " Raw)";
-                $scope.isMeetupError = false;
-                $scope.isLoading = false;
+                this.meetupStatus = "Loaded Event - " + event.name + " " + results.attendees.length + " attending. (" + rawNumberOfGuests + " Raw)";
+                this.isMeetupError = false;
+                this.isLoading = false;
             }, function(error){
-                $scope.meetupStatus = error.problem || 'Unexpected error loading events';
-                $scope.isMeetupError = true;
-                $scope.isLoading = false;
+                this.meetupStatus = error.problem || 'Unexpected error loading events';
+                this.isMeetupError = true;
+                this.isLoading = false;
             } );
         }, function failure(error){
-            $scope.meetupStatus = error.problem || 'Unexpected error loading events';
-            $scope.isMeetupError = true;
-            $scope.isLoading = false;
+            this.meetupStatus = error.problem || 'Unexpected error loading events';
+            this.isMeetupError = true;
+            this.isLoading = false;
         });
     };
 });
