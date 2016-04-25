@@ -20,6 +20,6 @@
     <button type="submit"
             class="btn btn-primary"
             ng-click="ctrl.retrievePlayers()"
-            ng-disabled="isLoading">Retrieve Players</button>
-    <span class="{{isMeetupError ? 'danger' : 'success'}}">{{meetupStatus}}</span>
+            ng-disabled="ctrl.isLoading">Retrieve Players</button>
+    <span class="{{ctrl.isMeetupError ? 'danger' : 'success'}}">{{ctrl.meetupStatus}}</span>
 </div>

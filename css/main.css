@@ -128,3 +128,12 @@ button {
 .tabContainer li.active {
     background-color: lightblue;
 }
+
+.danger {
+    color: #b22222;
+}
+
+.success {
+    color: #228b22;
+}
+

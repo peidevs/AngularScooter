@@ -22,7 +22,6 @@ scooter.controller('ConfigurationController', function ($location, $q, config, a
         });
     };
 
-    //TODO consider moving this and any "attendee" specific logic to attendee factory
     this._updateWinnerStatus = function () {
 
         var numPlayersStillAlive = this.players.filter( function( player){
@@ -81,8 +80,6 @@ scooter.controller('ConfigurationController', function ($location, $q, config, a
     };
 
     this.removePlayer = function(){
-
-
         this.players = this.players.filter( function(player){
            return !this.selectedDeadPlayers.some( function(selectedDeadPlayer){
                return selectedDeadPlayer.name === player.name && !player.isAlive;
@@ -91,47 +88,46 @@ scooter.controller('ConfigurationController', function ($location, $q, config, a
     };
 
     this.retrievePlayers = function() {
+        var processGuestData = function( results ){
+            var guests = meetupService.retrieveGuests( results.attendees );
 
-        this.isLoading = true;
+            results.attendees = results.attendees.concat( guests );
 
-        meetupService.retrieveEvent( this.apiKey, this.groupName, this.meetupDate).then( function eventSuccess(event)
-        {
+            var rawNumberOfGuests = results.attendees.length;
+
+            results.attendees = meetupService.filterElders( results.attendees, results.elders );
+
+            this.players = results.attendees.map( function( rsvp ){
+                var thumb_link;
+                if (rsvp.member_photo) {
+                    thumb_link = rsvp.member_photo.thumb_link;
+                }
+                return new Player( rsvp.member.name, thumb_link);
+            });
+
+            this.meetupStatus = "Loaded Event - " + results.attendees.length + " attending. (" + rawNumberOfGuests + " Raw)";
+            this.isMeetupError = false;
+            this.isLoading = false;
+        };
+
+        var eventInformationLoaded = function( event ){
             var attendeePromise = meetupService.retrieveAttendees( this.apiKey, event.id );
             var elderPromise = meetupService.retrieveElders( this.apiKey, this.groupName );
 
             $q.all( {
                 attendees : attendeePromise,
                 elders : elderPromise
-            }).then( function( results )
-            {
-                var guests = meetupService.retrieveGuests( results.attendees );
+            }).then( processGuestData.bind(this), errorLoadingMeetupInformation.bind(this) );
+        };
 
-                results.attendees = results.attendees.concat( guests );
-
-                var rawNumberOfGuests = results.attendees.length;
-
-                results.attendees = meetupService.filterElders( results.attendees, results.elders );
-
-                this.players = results.attendees.map( function( rsvp ){
-                    var thumb_link;
-                    if (rsvp.member_photo) {
-                        thumb_link = rsvp.member_photo.thumb_link;
-                    }
-                    return new Player( rsvp.member.name, thumb_link);
-                });
-
-                this.meetupStatus = "Loaded Event - " + event.name + " " + results.attendees.length + " attending. (" + rawNumberOfGuests + " Raw)";
-                this.isMeetupError = false;
-                this.isLoading = false;
-            }, function(error){
-                this.meetupStatus = error.problem || 'Unexpected error loading events';
-                this.isMeetupError = true;
-                this.isLoading = false;
-            } );
-        }, function failure(error){
+        var errorLoadingMeetupInformation = function( error ){
             this.meetupStatus = error.problem || 'Unexpected error loading events';
             this.isMeetupError = true;
             this.isLoading = false;
-        });
+        };
+
+        this.isLoading = true;
+        meetupService.retrieveEvent( this.apiKey, this.groupName, this.meetupDate)
+            .then( eventInformationLoaded.bind(this), errorLoadingMeetupInformation.bind(this));
     };
 });
