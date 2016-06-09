@@ -94,41 +94,6 @@ button {
 
 }
 
-/* Tab sections*/
-/* Themes should override the following
-    .tabContainer li.active {} with background color of the active tab
-    .tabContainer .tabContent to remove border or change background color of config
-*/
-.tabContainer ul {
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
-}
-
-.tabContainer li {
-    display: inline;
-    margin-right: 2px;
-    border: solid;
-    border-width: 1px 1px 0px 1px;
-}
-
-.tabContainer a {
-    padding-left: 15px;
-    padding-right: 15px;
-    text-decoration: none;
-}
-
-.tabContainer .tab-content {
-    border: solid;
-    border-width: 1px;
-    padding: 20px;
-    min-width: 350px;
-}
-
-.tabContainer li.active {
-    background-color: lightblue;
-}
-
 .danger {
     color: #b22222;
 }

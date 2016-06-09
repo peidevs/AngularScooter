@@ -38,3 +38,68 @@
 .configuration .tabs div.content > div.active {
     display: block;
 }
+
+
+/* Tab sections*/
+/* Themes should override the following
+    .tabContainer li.active {} with background color of the active tab
+    .tabContainer .tabContent to remove border or change background color of config
+*/
+.configuration .tabContainer ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.configuration .tabContainer li {
+    display: inline;
+    margin-right: 2px;
+    border: solid;
+    border-width: 1px 1px 0px 1px;
+}
+
+.configuration .tabContainer a {
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration: none;
+}
+
+.configuration .tabContainer .tab-content {
+    border: solid;
+    border-width: 1px;
+    padding: 20px;
+    min-width: 350px;
+}
+
+.configuration .tabContainer li.active {
+    background-color: lightblue;
+}
+
+/*Hacks to get me through the night*/
+.configuration .tab-content {
+    background-color : #FAEBD7;
+}
+
+.configuration .tabContainer > ul li{
+    background-color: white;
+}
+.configuration .tabContainer > ul li a{
+    color : black;
+}
+
+.configuration .meetupTab label {
+    display: inline-block;
+    min-width: 85px;
+}
+
+.configuration {
+    line-height: 1.2em;
+}
+
+.configuration .meetupTab button {
+    width : 145px;
+}
+
+.configuration tab {
+    line-height: 1.5em;
+}

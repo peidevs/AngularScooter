@@ -1,25 +1,29 @@
-<div>
-    <label for="groupName">Group Name</label>
-    <input type="text"
-           id="groupName"
-           placeholder="pei-developers"
-           ng-model="ctrl.groupName">
-
-    <label for="apiKey">API Key</label>
-    <input type="text"
-           id="apiKey"
-           placeholder="See api.meetup.com"
-           ng-model="ctrl.apiKey">
-
-    <label for="meetupDate">Meetup Date</label>
-    <input type="text"
-           id="meetupDate"
-           placeholder="yyyy-MM-dd"
-           ng-model="ctrl.meetupDate">
+<div class="meetupTab">
+    <div>
+        <label for="groupName">Group Name</label>
+        <input type="text"
+               id="groupName"
+               placeholder="pei-developers"
+               ng-model="ctrl.groupName">
+    </div>
+    <div>
+        <label for="apiKey">API Key</label>
+        <input type="text"
+               id="apiKey"
+               placeholder="See api.meetup.com"
+               ng-model="ctrl.apiKey">
+    </div>
+    <div>
+        <label for="meetupDate">Meetup Date</label>
+        <input type="text"
+               id="meetupDate"
+               placeholder="yyyy-MM-dd"
+               ng-model="ctrl.meetupDate">
+    </div>
 
     <button type="submit"
-            class="btn btn-primary"
+            class="play"
             ng-click="ctrl.retrievePlayers()"
             ng-disabled="ctrl.isLoading">Retrieve Players</button>
-    <span class="{{ctrl.isMeetupError ? 'danger' : 'success'}}">{{ctrl.meetupStatus}}</span>
+    <div class="{{ctrl.isMeetupError ? 'danger' : 'success'}}">{{ctrl.meetupStatus}}</div>
 </div>
